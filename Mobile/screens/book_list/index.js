@@ -2,11 +2,15 @@ import React from "react";
 import { Text, View } from "react-native";
 
 import MyButton from "../../components/button";
+import colours from "../../style_constants/colours";
 
 import styles from "../../style_constants/style-sheet";
 
 const BookListScreen = ({ navigation }) => (
-  <View style={styles.container}>
+  <View style={[ 
+      styles.container,
+      { backgroundColor: colours.baseGrey } 
+  ]}>
     <Text>Book List</Text>
 
     <Text style={styles.h1Font}>This is h1 header!</Text>
