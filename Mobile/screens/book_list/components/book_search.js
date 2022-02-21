@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Caption, Searchbar } from "react-native-paper";
 
+
 const BookSearch = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
-
     const onChangeSearch = query => setSearchQuery(query);
 
     return (
@@ -11,7 +11,9 @@ const BookSearch = () => {
             placeholder="Search"
             onChangeText={onChangeSearch}
             value={searchQuery}
+            icon='book-search'
         />
+
     );
 };
 
