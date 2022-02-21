@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator();
 
 const AccountStack = () => {
     return (
-        <View style={{flex: 1}} collapsable={false}>
+        <View style={{ flex: 1 }} collapsable={false}>
             <Stack.Navigator
                 initialRouteName='AccountPage'
             >
@@ -39,7 +39,7 @@ const AccountStack = () => {
 
 const BookStack = () => {
     return (
-        <View style={{flex: 1}} collapsable={false}>
+        <View style={{ flex: 1 }} collapsable={false}>
             <Stack.Navigator
                 initialRouteName='Books'
             >
