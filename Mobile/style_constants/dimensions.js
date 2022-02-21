@@ -1,4 +1,4 @@
-import { Dimensions, NativeModules } from 'react-native';
+import { Dimensions } from 'react-native';
 
 const dimensions = {
     deviceHeight: Dimensions.get('window').height,
