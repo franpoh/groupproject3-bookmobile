@@ -4,17 +4,19 @@ import { Text, View, Alert } from "react-native";
 import MyButton from "../../components/button";
 import styles from "../../style_constants/style-sheet";
 
-const BookDetailsScreen = ({ navigation }) => (
+const BookListScreen = ({ navigation }) => (
   <View style={styles.container}>
-    <Text>Book Details</Text>
+    <Text>Book List</Text>
 
     <MyButton 
-      text="Add to Wishlist" 
+      text="Book Details" 
       buttonAction={ 
         () => {
+          // navigation.navigate("Book Details", {screen: "Book Details"});
+
           Alert.alert(
             'Placeholder',
-            "Book has been added to Wishlist",
+            "Jumping to book details",
             [
               { text: "OK" }
             ]
@@ -49,4 +51,4 @@ const BookDetailsScreen = ({ navigation }) => (
   </View>
 );
 
-export default BookDetailsScreen;
+export default BookListScreen;
