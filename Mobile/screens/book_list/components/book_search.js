@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Caption, Searchbar } from "react-native-paper";
+import { Caption, Searchbar, Provider as PaperP } from "react-native-paper";
 
 
 const BookSearch = () => {
@@ -8,15 +8,18 @@ const BookSearch = () => {
 
 
     return (
-        <Searchbar
-            placeholder="Search"
-            onChangeText={onChangeSearch}
-            // onChangeText={(event) => {
-            //     searchFilter(event.nativeEvent.text);
-            // }} // use with useEffect(), [xxx]
-            value={searchQuery}
-            icon='book-search'
-        />
+        <PaperP>
+            <Searchbar
+                placeholder="Search"
+                onChangeText={onChangeSearch}
+                // onChangeText={(event) => {
+                //     searchFilter(event.nativeEvent.text);
+                // }} // use with useEffect(), [xxx]
+                value={searchQuery}
+                icon='book-search'
+            />
+        </PaperP>
+
 
     );
 };
