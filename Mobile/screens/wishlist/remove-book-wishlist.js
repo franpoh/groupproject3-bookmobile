@@ -9,8 +9,7 @@ export default function removeBookfromWishList (data) {
       if (data.userWishlist[xx] === data.indexId) {
         data.userWishlist.splice(xx, 1);        
       };
-    };    
-    // updateUserWishlist(data.userWishlist);
+    };        
     return data.userWishlist;
 };
 
