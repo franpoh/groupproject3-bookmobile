@@ -129,10 +129,10 @@ const TabNavigator = () => {
 }
 
 export default function App() {
-    return (
+    return (        
         <NavigationContainer>
             <TabNavigator />
-        </NavigationContainer>
+        </NavigationContainer>        
     )
 }
 
