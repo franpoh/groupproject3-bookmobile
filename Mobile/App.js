@@ -14,7 +14,7 @@ import WishlistScreen from './screens/wishlist';
 import LoginScreen from './screens/login';
 import SignUpScreen from './screens/signup';
 import BookDetailsScreen from './screens/book_details';
-import BookListScreen from './screens/book_list';
+// import BookListScreen from './screens/book_list';
 import UploadBookScreen from './screens/upload_book';
 import UploadReviewScreen from './screens/upload_review';
 import SplashScreen from './components/splash';
@@ -61,7 +61,7 @@ const RootStackScreen = ({ userToken }) => {
             labelStyle={{ fontSize: 12 }}
             barStyle={{ backgroundColor: colours.secondaryLight }}
         >
-            <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+            {/* <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
                     name='Book List'
                     component={BookListScreen}
@@ -76,7 +76,7 @@ const RootStackScreen = ({ userToken }) => {
                         ),
                     }}
                 />
-            </RootStack.Group>
+            </RootStack.Group> */}
             {userToken ? (
                 <RootStack.Group>
                     <RootStack.Screen
