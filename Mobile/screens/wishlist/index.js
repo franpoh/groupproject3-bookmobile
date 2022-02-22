@@ -81,19 +81,21 @@ const WishlistScreen = ({ navigation }) => {
 
     return (
       <TouchableHighlight onPress={() => {
-        Alert.alert(
-          'Jumping to',
-          `Removing Book ID ${data.value}`,
-          [
-            { text: "Cancel" },
-            {
-              test: 'OK',
-              onPress: () => {                
-                removeBookfromWishList(data.value);
-              }
-            } 
-          ]
-        )}
+        removeBookfromWishList(data.value);
+        // Alert.alert(
+        //   'Jumping to',
+        //   `Removing Book ID ${data.value}`,
+        //   [
+        //     { text: "Cancel" },
+        //     {
+        //       test: 'OK',
+        //       onPress: () => {                
+        //         removeBookfromWishList(data.value);
+        //       }
+        //     } 
+        //   ]
+        // )
+      }
       }>
         <Text>    {trashCan}</Text>
       </TouchableHighlight>                
@@ -118,13 +120,13 @@ const WishlistScreen = ({ navigation }) => {
   //   <Text>Wishlist</Text>    
   // </PaperP>
   
-  <View style={styles.container}>
+  // <View style={styles.container}>
     <PaperP>
     
       <View style={styles.contentArea}>
       <List.Section>
       <ScrollView>
-        <View style={[styles.rowSpaceBtwn, { height: 'auto', paddingHorizontal: 5 }]}>
+        <View style={[styles.rowSpaceBtwn, { height: 'auto', paddingHorizontal: 15 }]}>
           <List.Subheader style={styles.h3Bold}>Wishlist Section</List.Subheader>
           <TouchableHighlight onPress={() => {setShowDel(!showDel)}}>
             <Text style={{
@@ -142,21 +144,21 @@ const WishlistScreen = ({ navigation }) => {
       </List.Section>
       </View>      
     </PaperP>  
-    {/* <MyButton 
-      text="Testing scrollview" 
-      buttonAction={ 
-        () => {
-          Alert.alert(
-            'Placeholder',
-            `${userA.wishlist}`,
-            [
-              { text: "OK" }
-            ]
-          )
-        }
-      } 
-    /> */}
-  </View>
+    // {/* <MyButton 
+    //   text="Testing scrollview" 
+    //   buttonAction={ 
+    //     () => {
+    //       Alert.alert(
+    //         'Placeholder',
+    //         `${userA.wishlist}`,
+    //         [
+    //           { text: "OK" }
+    //         ]
+    //       )
+    //     }
+    //   } 
+    // /> */}
+  // </View>
   
 )};
 
