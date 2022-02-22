@@ -20,7 +20,7 @@ const UploadReviewScreen = ({ navigation }) => (
               { text: "OK" }
             ]
           );
-          navigation.navigate('Books', {screen: 'Book List'});
+          navigation.navigate("Book List");
         }
       } 
     />
