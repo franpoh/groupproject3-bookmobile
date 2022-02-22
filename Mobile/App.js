@@ -53,7 +53,6 @@ const RootStack = createMaterialBottomTabNavigator();
 
 const RootStackScreen = ({ userToken }) => {
     console.log("In Stack", userToken);
-
     return (
         <RootStack.Navigator
             initialRouteName='Books'
@@ -204,3 +203,5 @@ export default function App() {
         </AuthContext.Provider>
     )
 }
+
+
