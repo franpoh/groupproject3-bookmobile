@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     contentArea: { // g1        
         width: win.width*.95,
         marginTop: win.width*.05,
-        borderWidth: 1,
-        borderColor: 'red'
+        // borderWidth: 1,
+        // borderColor: 'red'
     },
 
     rowSpaceBtwn: { // g1
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         height: 40,        
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'red'
+        // borderWidth: 1,
+        // borderColor: 'red'
     },
 })
 
