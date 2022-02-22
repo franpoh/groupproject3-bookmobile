@@ -42,7 +42,7 @@ const BookDetailsScreen = ({ navigation }) => (
       text="Upload Review"
       buttonAction={
         () => {
-          navigation.navigate("Book Upload", {screen: "Review Upload"});
+          navigation.navigate("Review Upload", {screen: "Review Upload"});
         }
       }
     />

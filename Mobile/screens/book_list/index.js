@@ -1,35 +1,54 @@
 import React from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, Alert } from "react-native";
 
 import MyButton from "../../components/button";
-import colours from "../../style_constants/colours";
 import styles from "../../style_constants/style-sheet";
-import BookSearch from "./components/book_search";
-import GetBooks from "./getBooks";
-
 
 const BookListScreen = ({ navigation }) => (
+  <View style={styles.container}>
+    <Text>Book List</Text>
 
-    <ScrollView>
-        <View style={[styles.container, { backgroundColor: colours.baseGrey }]}>
-            <Text style={styles.h1Font}>Welcome to Book Loop!</Text>
-            <BookSearch />
-            <Text>Explore our depositery</Text>
-            <MyButton
-                text="Book Details"
-                buttonAction={
-                    () => {
-                        navigation.navigate("Books", { screen: 'Book Details' });
-                    }
-                }
-            />
+    <MyButton
+      text="Book Details"
+      buttonAction={
+        () => {
+          // navigation.navigate("Book Details", {screen: "Book Details"});
 
-        </View>
-        <View style={{ backgroundColor: colours.baseWhite }}>
-            <GetBooks />
-        </View>
-    </ScrollView>
+          Alert.alert(
+            'Placeholder',
+            "Jumping to book details",
+            [
+              { text: "OK" }
+            ]
+          )
+        }
+      }
+    />
 
+    <MyButton
+      text="Buy"
+      buttonAction={
+        () => {
+          Alert.alert(
+            'Placeholder',
+            "Book has been purchased",
+            [
+              { text: "OK" }
+            ]
+          )
+        }
+      }
+    />
+
+    <MyButton
+      text="Upload Review"
+      buttonAction={
+        () => {
+          navigation.navigate("Review Upload", { screen: "Review Upload" });
+        }
+      }
+    />
+  </View>
 );
 
 export default BookListScreen;
