@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import colours from "./colours";
+
+const win = Dimensions.get('window');
 
 const fontType = "sans-serif";
 
@@ -51,6 +53,22 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'normal',
         color: colours.secondaryDark
+    },
+
+    contentArea: { // g1        
+        width: win.width*.95,
+        marginTop: win.width*.05,
+        borderWidth: 1,
+        borderColor: 'red'
+    },
+
+    rowSpaceBtwn: { // g1
+        flexDirection: "row",    
+        justifyContent: 'space-between',
+        height: 40,        
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: 'red'
     },
 })
 
