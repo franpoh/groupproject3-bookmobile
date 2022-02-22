@@ -7,16 +7,33 @@ const { v4: uuidv4 } = require('uuid');
 import styles from "../../style_constants/style-sheet";
 import MyButton from "../../components/button";
 import colours from "../../style_constants/colours";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { userB, indexBooks, swap } from '../../components/test-data';
 
-const UploadBookScreen = ({ navigation }) => {
+const UploadBookScreen = ( { navigation } ) => {
   
-  // const [ userUploadedBooks, updateUserUploadList ] = useState(uploadlist)
+  const [ userUploadedBooks, updateUserUploadList ] = useState(userB.uploadlist);
+  const SwapList = swap;
+  const userId = userB.userId;
+  const filtered = swap.filter(data => (data.userId == userId))
 
-  // function CheckUpoads() {
+  function test() {
+    // console.log(userB); //returns user info succeesfully
+    // console.log(swap); //returns swap list successfully
+    // console.log(userId); //returns 4 successfully
+    console.log("checking filtered", filtered);
+    return console.log("Test Function Ran");
+  }
+
+// IF BANNED, show ban message, divert the user back to main page
+// If admin/user show screen, else show user does not exist, divert to registration.
+  // if (userB.type == 'ADMIN' || 'USER') {
+    
+  // }
+
+  // function CheckUploads() {
   //   if (userUploadedBooks.length === 0) {
   //     return(
-  //       <List.Item titleStyle = {{ fontSize:1 }} description = {props=> <Text>Your Upload List is empty. Upload a book below!</Text>} />
+  //       <List.Item titleStyle = { styles.textNormal } description = {props=> <Text>Your Upload List is empty. Upload a book below!</Text>} />
   //     )
   //   } else if (userUploadedBooks.length > 0) {
   //     return generateUploads();
@@ -29,7 +46,7 @@ const UploadBookScreen = ({ navigation }) => {
 
   // function generateUploads() {
   //   console.log('Checking Upload Refresh: ', userUploadedBooks);
-
+    
   //   return userUploadedBooks.map(
       
   //   )
@@ -77,6 +94,7 @@ return (
                 ]
               );
               navigation.navigate("Book Upload");
+              test();
             }
           } 
         />
