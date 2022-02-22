@@ -4,6 +4,8 @@ import { Avatar, List, Card, Title, Paragraph, Provider as PaperP } from 'react-
 import styles from "../../style_constants/style-sheet";
 import MyButton from "../../components/button";
 import { useNavigation } from '@react-navigation/native';
+import { userA, indexBooks, swap } from '../../components/test-data';
+
 
 // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 // https://reactnavigation.org/docs/connecting-navigation-prop/
@@ -25,10 +27,34 @@ function GetBooks() {
                         )}
                         title="List item 1"
                         description="Describes item 1. Example of a very very long description."
-                        onPress={() => navigation.navigate("Books", { screen: "Book Details" })}
+                        onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
                     />
+                    <View style={{ flexDirection: "row", alignSelf: "flex-end" }}>
+                        <MyButton
+                            text="Book Details"
+                            buttonAction={
+                                () => {
+                                    navigation.navigate("Book Upload", { screen: 'Book Details' });
+                                }
+                            }
+                        />
+                        <MyButton
+                            text="Buy"
+                            buttonAction={
+                                () => {
+                                    Alert.alert(
+                                        'Placeholder',
+                                        "Book has been purchased",
+                                        [
+                                            { text: "OK" }
+                                        ]
+                                    )
+                                }
+                            }
+                        />
+                    </View>
 
-                    <TouchableOpacity onPress={() => navigation.navigate("Books", { screen: "Book Details" })}>
+                    {/* <TouchableOpacity onPress={() => navigation.navigate("Book Upload", { screen: "Book Details" })}>
                         <Card mode='outlined'>
                             <Card.Cover source={{
                                 uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
@@ -40,7 +66,7 @@ function GetBooks() {
                                 </Paragraph>
                             </Card.Content>
                         </Card>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     <List.Item
                         left={() => (
@@ -54,14 +80,31 @@ function GetBooks() {
                         title="List item 2"
                         description="Describes item 2. Example of a very very long description."
                     />
-                    <MyButton
-                        text="Book Details"
-                        buttonAction={
-                            () => {
-                                navigation.navigate("Books", { screen: 'Book Details' });
+                    <View style={{ flexDirection: "row", alignSelf: "flex-end" }}>
+                        <MyButton
+                            text="Book Details"
+                            buttonAction={
+                                () => {
+                                    navigation.navigate("Book Upload", { screen: 'Book Details' });
+                                }
                             }
-                        }
-                    />
+                        />
+                        <MyButton
+                            text="Buy"
+                            buttonAction={
+                                () => {
+                                    Alert.alert(
+                                        'Placeholder',
+                                        "Book has been purchased",
+                                        [
+                                            { text: "OK" }
+                                        ]
+                                    )
+                                }
+                            }
+                        />
+                    </View>
+
 
                     <List.Item
                         left={() => (
