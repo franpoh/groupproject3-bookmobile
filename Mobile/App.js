@@ -10,11 +10,11 @@ import colours from './style_constants/colours';
 import AuthContext from './context';
 
 import AccountScreen from './screens/account';
-import WishlistScreen from './test/wishlistindex';
+import WishlistScreen from './screens/wishlist';
 import LoginScreen from './screens/login';
 import SignUpScreen from './screens/signup';
 import BookDetailsScreen from './screens/book_details';
-import BookListScreen from './test/booklistindex';
+import BookListScreen from './screens/book_list';
 import UploadBookScreen from './screens/upload_book';
 import UploadReviewScreen from './screens/upload_review';
 import SplashScreen from './components/splash';
