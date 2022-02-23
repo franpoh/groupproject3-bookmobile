@@ -8,6 +8,8 @@ import styles from "../../style_constants/style-sheet";
 import MyButton from "../../components/button";
 import colours from "../../style_constants/colours";
 
+import removeBookfromWishList from "./remove-book-wishlist";
+
 // test data, TBD fetch from DB using userID from nav
 import { userA, indexBooks, swap } from '../../components/test-data';
 
@@ -17,7 +19,11 @@ let trashCan = '\uD83D\uDDD1'; // trashcam emoji U+1F5D1
 
 const WishlistScreen = ({ navigation }) => {
 
+  let localIndexBooks = indexBooks;
+  let localSwapBooks = swap;
+
   if (userA.wishlist === null) { userA.wishlist = []};
+  let localindexBooks
 
   const [ showDel, setShowDel ] = useState(false);
   const [ userWishlist, updateUserWishlist ] = useState(userA.wishlist);
@@ -47,9 +53,12 @@ const WishlistScreen = ({ navigation }) => {
     return userWishlist.map(
       (indexId) => {
         // console.log(indexId);
-        const matchIndex = indexBooks.filter(data => data.indexId === indexId); // check for title name in index
+        const matchIndex = localIndexBooks.filter(data => data.indexId === indexId); // check for title name in index
+        if (matchIndex.length === 0) {
+          return <View></View>; // in rare event wishlist and index indexID become desync (eg, wishlist keeps IndexId 4 but 4 somehow deleted from Idex inventory DB)
+        };
         // console.log('matched: ', matchIndex);
-        const matchSwap = swap.filter(data => (data.indexId === indexId && data.availability === 'YES')); // check swap for YES/NO
+        const matchSwap = localSwapBooks.filter(data => (data.indexId === indexId && data.availability === 'YES')); // check swap for YES/NO
         // console.log('swap YES: ', matchSwap);
         return <List.Item key={indexId} titleStyle={{ fontSize:1 }} description={props => {
           return (
@@ -66,8 +75,8 @@ const WishlistScreen = ({ navigation }) => {
                 </TouchableHighlight>                
               </View>
               <View style={{ flex: 1 }}>                
-                { !showDel && (matchSwap.length > 0) && <Text style={{ color: colours.secondaryDark }}>Avail</Text> }
-                { showDel && <RemoveIcon value={indexId} />}
+                { !showDel && (matchSwap.length > 0) && <Text style={{ color: colours.secondaryDark, alignSelf: 'flex-end' }}>Avail</Text> }
+                { showDel && <RemoveIcon indexIdValue={indexId} bookTitleValue={matchIndex[0].title} wishListValue={userWishlist} />}
               </View>
             </View>
           
@@ -80,47 +89,40 @@ const WishlistScreen = ({ navigation }) => {
   function RemoveIcon (data) {
 
     return (
-      <TouchableHighlight onPress={() => {
-        removeBookfromWishList(data.value);
-        // Alert.alert(
-        //   'Jumping to',
-        //   `Removing Book ID ${data.value}`,
-        //   [
-        //     { text: "Cancel" },
-        //     {
-        //       test: 'OK',
-        //       onPress: () => {                
-        //         removeBookfromWishList(data.value);
-        //       }
-        //     } 
-        //   ]
-        // )
+      <TouchableHighlight onPress={() => {        
+        Alert.alert(
+          'Are you sure?',
+          `Removing Book '${data.bookTitleValue}'`,
+          [
+            { text: "Cancel" },
+            {
+              test: 'OK',
+              onPress: () => {                
+                const updateWishlist =removeBookfromWishList({
+                  indexId: data.indexIdValue,
+                  userWishlist: data.wishListValue
+                });
+
+                console.log(updateWishlist);
+                updateUserWishlist(updateWishlist);
+                setShowDel(!showDel);  
+              }
+            } 
+          ]
+        )
       }
       }>
-        <Text>    {trashCan}</Text>
+        <Text style={{ alignSelf:'flex-end' }}>{trashCan}  </Text>
       </TouchableHighlight>                
     );
-  };
-
-  function removeBookfromWishList (data) {
-    console.log(`removing ${data}`);
-    let xx;
-    
-    for (xx=0; xx < userWishlist.length; xx++) {
-      if (userWishlist[xx] === data) {
-        userWishlist.splice(xx, 1);        
-      };
-    };    
-    updateUserWishlist(userWishlist);    
-    return;
-  };
+  };  
   
   return (
   // <PaperP style={styles.container}>
   //   <Text>Wishlist</Text>    
   // </PaperP>
   
-  // <View style={styles.container}>
+  <View style={styles.container}>
     <PaperP>
     
       <View style={styles.contentArea}>
@@ -144,7 +146,7 @@ const WishlistScreen = ({ navigation }) => {
       </List.Section>
       </View>      
     </PaperP>  
-    // {/* <MyButton 
+    {/* <MyButton 
     //   text="Testing scrollview" 
     //   buttonAction={ 
     //     () => {
@@ -158,7 +160,7 @@ const WishlistScreen = ({ navigation }) => {
     //     }
     //   } 
     // /> */}
-  // </View>
+  </View>
   
 )};
 

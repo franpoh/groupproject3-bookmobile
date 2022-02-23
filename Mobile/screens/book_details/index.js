@@ -7,10 +7,10 @@ import styles from "../../style_constants/style-sheet";
 const BookDetailsScreen = ({ navigation }) => (
   <View style={styles.container}>
     <Text>Book Details</Text>
-
-    <MyButton 
-      text="Add to Wishlist" 
-      buttonAction={ 
+    {/* https://www.youtube.com/watch?v=5NewXsBnoKw&t=473s */}
+    <MyButton
+      text="Add to Wishlist"
+      buttonAction={
         () => {
           Alert.alert(
             'Placeholder',
@@ -20,11 +20,11 @@ const BookDetailsScreen = ({ navigation }) => (
             ]
           )
         }
-      } 
+      }
     />
 
-    <MyButton 
-      text="Buy" 
+    <MyButton
+      text="Buy"
       buttonAction={
         () => {
           Alert.alert(
@@ -35,14 +35,14 @@ const BookDetailsScreen = ({ navigation }) => (
             ]
           )
         }
-      } 
+      }
     />
 
-    <MyButton 
-      text="Upload Review" 
+    <MyButton
+      text="Upload Review"
       buttonAction={
         () => {
-          navigation.navigate("Book Upload", {screen: "Review Upload"});
+          navigation.navigate("Review Upload", {screen: "Review Upload"});
         }
       }
     />
