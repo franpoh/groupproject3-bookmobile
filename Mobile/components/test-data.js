@@ -2,7 +2,8 @@ export {
     userA,
     userB,
     indexBooks,
-    swap
+    swap,
+    reviews
 };
 
 const userA = {
@@ -203,3 +204,41 @@ const swap = [
     },
 ];
 
+const reviews = [
+    {
+        reviewId: 1,
+        review: "Good for long rides",
+        userId: 4,
+        indexId: 66
+    },
+    {
+        reviewId: 1,
+        review: "Absolute mind blown",
+        userId: 4,
+        indexId: 23
+    },
+    {
+        reviewId: 1,
+        review: "Recommended. Didnt feel like 6000 pages",
+        userId: 3,
+        indexId: 5
+    },
+    {
+        reviewId: 1,
+        review: "Love the theme",
+        userId: 3,
+        indexId: 7
+    },
+    {
+        reviewId: 1,
+        review: "Best thriller Ive read",
+        userId: 4,
+        indexId: 9
+    },
+    {
+        reviewId: 1,
+        review: "Not sure why _ would do that",
+        userId: 3,
+        indexId: 2
+    }
+];
