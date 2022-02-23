@@ -1,16 +1,17 @@
 import React from "react";
 import { Text, View, Alert, ScrollView } from "react-native";
-
-import MyButton from "../../components/button";
 import styles from "../../style_constants/style-sheet";
 import colours from "../../style_constants/colours";
-import GetBooks from "./getBooks";
-import BookSearch from "./components/book_search";
+import BookSearch from "./book_search";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const BookListScreen = () => (
-  <View style={{ backgroundColor: colours.baseWhite }}>
-    <BookSearch />
-  </View>
+  <SafeAreaView>
+    <View style={{ backgroundColor: colours.baseWhite }}>
+      <BookSearch />
+    </View>
+  </SafeAreaView>
+
 );
 
 export default BookListScreen;

@@ -40,7 +40,7 @@ const indexBooks = [
     },
     {
         indexId: 2,
-        title: 'Midnights Children',
+        title: 'Beloved',
         author: 'Salman Rushdie',
         year: 1980,
         genreId: 1,
@@ -202,3 +202,4 @@ const swap = [
         availability: "YES"
     },
 ];
+

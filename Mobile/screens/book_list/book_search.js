@@ -1,26 +1,48 @@
-import { NavigationHelpersContext } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { ScrollView, FlatList, Image, View, TouchableOpacity, TextInput } from 'react-native';
+import { ScrollView, Image, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { List, Text, Searchbar, Provider as PaperP } from "react-native-paper";
-import { userA, indexBooks, swap } from '../../../components/test-data';
-import { useNavigation } from '@react-navigation/native';
-import image from '../../../assets/logo.png'
+import { userA, indexBooks, swap } from '../../components/test-data';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
+
 
 function BookSearch() {
 
-    const [search, setSearch] = React.useState('');
-    const [filteredData, setFilteredData] = React.useState([]);
-    const localIndexBooks = indexBooks;
-    const [data, setData] = React.useState(indexBooks);
-
     const navigation = useNavigation();
+    const route = useRoute();
+    const [search, setSearch] = React.useState('');
+    const [data, setData] = React.useState(indexBooks);
+    const [filteredData, setFilteredData] = React.useState([]);
+
+    const bookindex = indexBooks.reduce(function (p, c) {
+        p[c.indexId] = c;
+        return p;
+    }, {});
+    // console.log("BOOKS: ", bookindex)
+
+    const mergedSwapandIndexBooks = swap.map(function (c) {
+        const d = bookindex[c.indexId];
+        return {
+            indexId: c.indexId,
+            title: d.title,
+            author: d.author,
+            imageURL: d.imageURL
+        };
+    });
+    // console.log("MERGED: ", mergedSwapandIndexBooks)
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const unsubscribe = () => console.log("book_search blur");
+            console.log('book_search focus');
+            return unsubscribe;
+        }, [navigation])
+    );
 
     useEffect(() => {
         navigation.setOptions({
             headerShadowVisible: true,
-            headerTitle: "Book Loop",
             headerSearchBarOptions: {
-                placeholder: "Search books",
+                placeholder: "Search books by Title",
                 onChangeText: (event) => {
                     searchFilter(event.nativeEvent.text);
                 }
@@ -28,9 +50,10 @@ function BookSearch() {
         });
     }, [navigation]);
 
+    // if book not found?
     const searchFilter = (text) => {
         if (text) {
-            const newData = localIndexBooks.filter(item => {
+            const newData = indexBooks.filter(item => {
                 const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf(textData) > -1;
@@ -39,17 +62,17 @@ function BookSearch() {
             console.log(newData);
             setSearch(text);
         } else {
-            setData(localIndexBooks);
+            setData(indexBooks);
             setSearch(text);
         }
     }
 
     return (
-        <ScrollView>
-            {search ? (filteredData.map((element => {
+        <ScrollView >
+            {search ? (filteredData.map((element, index) => {
                 return (
-                    <View key={element.indexId} style={{ margin: 1 }}>
-                        <View>
+                    <View key={index}>
+                        <PaperP>
                             <List.Item
                                 left={props => (
                                     <Image {...props}
@@ -61,15 +84,15 @@ function BookSearch() {
                                 description={element.author}
                                 onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
                             />
-                        </View>
+                        </PaperP>
                     </View>
                 )
-            }))
+            })
             ) :
-                (localIndexBooks.map((element => {
+                (data.slice(0, 7).map((element, index) => {
                     return (
-                        <View key={element.indexId} style={{ margin: 1 }}>
-                            <View>
+                        <View key={index}>
+                            <PaperP>
                                 <List.Item
                                     left={props => (
                                         <Image {...props}
@@ -81,17 +104,15 @@ function BookSearch() {
                                     description={element.author}
                                     onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
                                 />
-                            </View>
+                            </PaperP>
                         </View>
                     )
-                }))
+                })
                 )}
         </ScrollView>
     )
 
 };
-
-
 
 export default BookSearch;
 
