@@ -42,6 +42,20 @@ const BookStackScreen = () => {
     )
 }
 
+const GeneralStack = () => {
+    return (
+        <View style={{ flex: 1 }} collapsable={false}>
+            <BookStack.Navigator
+                initialRouteName='Books'
+            >
+                <BookStack.Screen name="Book Loop" component={BookListScreen} />
+                <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
+                <BookStack.Screen name="Upload Review" component={UploadReviewScreen} />
+            </BookStack.Navigator>
+        </View>
+    )
+}
+
 // For Paper's BottomNavigation:
 // For integration with React Navigation, you can use react-navigation-material-bottom-tabs and consult createMaterialBottomTabNavigator documentation
 // https://reactnavigation.org/docs/material-bottom-tab-navigator/
@@ -63,7 +77,8 @@ const RootStackScreen = ({ userToken }) => {
             <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
                     name='Book List'
-                    component={BookListScreen}
+                    // component={BookListScreen}
+                    component={GeneralStack}
                     options={{
                         tabBarLabel: 'Book List',
                         tabBarIcon: ({ color }) => (
