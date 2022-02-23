@@ -34,10 +34,12 @@ const UploadBookScreen = ( { navigation } ) => {
     // console.log(userId); //returns 4 successfully
     // console.log("Array Z", filtered);
     // console.log("checking test", testfilter);
+    console.log("Test Function Ran, Results:");
     RetrieveUserSwap()
-    return console.log("Test Function Ran");
-  }
+    return;
+  };
 
+  
 
 
 return (
