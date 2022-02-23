@@ -1,5 +1,6 @@
 export {
     userA,
+    userB,
     indexBooks,
     swap
 };
@@ -13,6 +14,16 @@ const userA = {
     wishlist: [2, 5, 7, 9, 10, 23, 45, 66],
     type: 'USER'
 };
+
+const userB = {
+    userId : 4,
+    username: 'Aarontest',
+    email: 'Aarontest@hmail.com',
+    password: 'abcdefg',
+    points: 100,
+    wishlist: [1,2,5],
+    type: 'USER'
+}
 
 const indexBooks = [
     {
@@ -122,6 +133,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 2,
+        userId: 3,
         availability: "YES"
     },
     {
@@ -129,6 +141,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 5,
+        userId: 3,
         availability: "YES"
     },
     {
@@ -136,6 +149,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 7,
+        userId: 3,
         availability: "NO"
     },
     {
@@ -143,6 +157,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 9,
+        userId: 3,
         availability: "YES"
     },
     {
@@ -150,6 +165,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 9,
+        userId: 4,
         availability: "YES"
     },
     {
@@ -157,6 +173,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 10,
+        userId: 4,
         availability: "NO"
     },
     {
@@ -164,6 +181,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 23,
+        userId: 4,
         availability: "YES"
     },
     {
@@ -171,6 +189,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 45,
+        userId: 4,
         availability: "YES"
     },
     {
@@ -178,6 +197,7 @@ const swap = [
         price: 1,
         comments: "good",
         indexId: 66,
+        userId: 4,
         availability: "YES"
     },
 ];
