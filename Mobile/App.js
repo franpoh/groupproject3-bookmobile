@@ -10,11 +10,11 @@ import colours from './style_constants/colours';
 import AuthContext from './context';
 
 import AccountScreen from './screens/account';
-import WishlistScreen from './screens/wishlist';
+import WishlistScreen from './test/wishlistindex';
 import LoginScreen from './screens/login';
 import SignUpScreen from './screens/signup';
 import BookDetailsScreen from './screens/book_details';
-// import BookListScreen from './screens/book_list';
+import BookListScreen from './test/booklistindex';
 import UploadBookScreen from './screens/upload_book';
 import UploadReviewScreen from './screens/upload_review';
 import SplashScreen from './components/splash';
@@ -42,6 +42,20 @@ const BookStackScreen = () => {
     )
 }
 
+const GeneralStack = () => {
+    return (
+        <View style={{ flex: 1 }} collapsable={false}>
+            <BookStack.Navigator
+                initialRouteName='Books'
+            >
+                <BookStack.Screen name="Book Loop" component={BookListScreen} />
+                <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
+                <BookStack.Screen name="Upload Review" component={UploadReviewScreen} />
+            </BookStack.Navigator>
+        </View>
+    )
+}
+
 // For Paper's BottomNavigation:
 // For integration with React Navigation, you can use react-navigation-material-bottom-tabs and consult createMaterialBottomTabNavigator documentation
 // https://reactnavigation.org/docs/material-bottom-tab-navigator/
@@ -53,7 +67,6 @@ const RootStack = createMaterialBottomTabNavigator();
 
 const RootStackScreen = ({ userToken }) => {
     console.log("In Stack", userToken);
-    
     return (
         <RootStack.Navigator
             initialRouteName='Books'
@@ -61,10 +74,11 @@ const RootStackScreen = ({ userToken }) => {
             labelStyle={{ fontSize: 12 }}
             barStyle={{ backgroundColor: colours.secondaryLight }}
         >
-            {/* <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+            <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
                     name='Book List'
-                    component={BookListScreen}
+                    // component={BookListScreen}
+                    component={GeneralStack}
                     options={{
                         tabBarLabel: 'Book List',
                         tabBarIcon: ({ color }) => (
@@ -76,7 +90,7 @@ const RootStackScreen = ({ userToken }) => {
                         ),
                     }}
                 />
-            </RootStack.Group> */}
+            </RootStack.Group>
             {userToken ? (
                 <RootStack.Group>
                     <RootStack.Screen
