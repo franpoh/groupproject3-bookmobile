@@ -3,17 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, FlatList, Image, View, TouchableOpacity, TextInput } from 'react-native';
 import { List, Text, Searchbar, Provider as PaperP } from "react-native-paper";
 import { userA, indexBooks, swap } from '../../../components/test-data';
-import GetBooks from '../getBooks';
 import { useNavigation } from '@react-navigation/native';
 import image from '../../../assets/logo.png'
 
-
-
-
-// const BookSearch = ({navigation}) => {
 function BookSearch() {
-    // const [searchQuery, setSearchQuery] = React.useState('');
-    // const onChangeSearch = query => setSearchQuery(query);
+
     const [search, setSearch] = React.useState('');
     const [filteredData, setFilteredData] = React.useState([]);
     const localIndexBooks = indexBooks;
@@ -23,32 +17,16 @@ function BookSearch() {
 
     useEffect(() => {
         navigation.setOptions({
-            headerRight: () => (
-                <Image source={image} style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: 20,
-                    marginLeft: 420,
-                    flexDirection: 'column'
-                }} />
-            ),
+            headerShadowVisible: true,
+            headerTitle: "Book Loop",
             headerSearchBarOptions: {
                 placeholder: "Search books",
                 onChangeText: (event) => {
                     searchFilter(event.nativeEvent.text);
-
-                },
-                // onCancelButtonPress: () => {
-                //     setSearch(null);
-                // }
+                }
             },
         });
     }, [navigation]);
-
-    // const setData = (event) => {
-    //     // navigation.navigate("Book Details", { screen: "Book Details" })
-    //     console.log("Exited")
-    // }
 
     const searchFilter = (text) => {
         if (text) {
@@ -111,39 +89,6 @@ function BookSearch() {
         </ScrollView>
     )
 
-    // return (
-    //     <PaperP>
-    //         <Searchbar
-    //             placeholder="Search"
-    //             // onChangeText={onChangeSearch}
-    //             onChangeText={(event) => searchFilter(event)}
-    //             value={search}
-    //             icon='book-search'
-    //         />
-    //         <FlatList
-    //             data={filteredData}
-    //             keyExtractor={(item, index) => index.toString()}
-    //             renderItem={({ item }) => (
-    //                 <Text
-    //                     // style={styles.itemStyle}
-    //                     onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}>
-    //                     {item.title}
-    //                 </Text>
-    //             )}
-    //             ItemSeparatorComponent={() => (
-    //                 <View
-    //                     style={{
-    //                         height: 1,
-    //                         width: '100%',
-    //                         backgroundColor: '#C8C8C8',
-    //                     }}
-    //                 />
-    //             )}
-    //         />
-    //     </PaperP>
-
-
-    // );
 };
 
 

@@ -47,6 +47,7 @@ const GeneralStack = () => {
         <View style={{ flex: 1 }} collapsable={false}>
             <BookStack.Navigator
                 initialRouteName='Books'
+
             >
                 <BookStack.Screen name="Book Loop" component={BookListScreen} />
                 <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
