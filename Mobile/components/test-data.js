@@ -7,10 +7,10 @@ export {
 const userA = {
     userId: 3,
     username: 'Bob',
-    email:'abc123@hmail.com',
+    email: 'abc123@hmail.com',
     password: "abcdefg",
     points: 999,
-    wishlist: [2,5,7,9,10,23,45,66],
+    wishlist: [2, 5, 7, 9, 10, 23, 45, 66],
     type: 'USER'
 };
 
@@ -21,7 +21,10 @@ const indexBooks = [
         author: 'Name of author1',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 2,
@@ -29,7 +32,10 @@ const indexBooks = [
         author: 'Name of author2',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 5,
@@ -37,7 +43,10 @@ const indexBooks = [
         author: 'Name of author5',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 7,
@@ -45,7 +54,10 @@ const indexBooks = [
         author: 'Name of author7',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 9,
@@ -53,7 +65,10 @@ const indexBooks = [
         author: 'Name of author9',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 10,
@@ -61,7 +76,10 @@ const indexBooks = [
         author: 'Name of author10',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 23,
@@ -69,7 +87,10 @@ const indexBooks = [
         author: 'Name of author23',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 45,
@@ -77,7 +98,10 @@ const indexBooks = [
         author: 'Name of author45',
         year: 1980,
         genreId: 1,
-        imageURL: null,
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
     },
     {
         indexId: 66,
@@ -85,8 +109,11 @@ const indexBooks = [
         author: 'Name of author66',
         year: 1980,
         genreId: 1,
-        imageURL: null,
-    },    
+        imageURL: {
+            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        }
+
+    },
 ];
 
 const swap = [
