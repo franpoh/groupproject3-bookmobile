@@ -3,6 +3,9 @@ import { ScrollView, Image, View, TouchableOpacity, TextInput, Alert } from 'rea
 import { List, Text, Searchbar, Provider as PaperP } from "react-native-paper";
 import { userA, indexBooks, swap } from '../../components/test-data';
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from '../../style_constants/style-sheet';
+import colours from '../../style_constants/colours';
 
 
 function BookSearch() {
@@ -12,6 +15,7 @@ function BookSearch() {
     const [search, setSearch] = React.useState('');
     const [data, setData] = React.useState(indexBooks);
     const [filteredData, setFilteredData] = React.useState([]);
+    const [header, setHeader] = React.useState("Featured")
 
     const bookindex = indexBooks.reduce(function (p, c) {
         p[c.indexId] = c;
@@ -59,26 +63,29 @@ function BookSearch() {
                 return itemData.indexOf(textData) > -1;
             })
             setFilteredData(newData);
+            setHeader('');
             console.log(newData);
             setSearch(text);
         } else {
             setData(indexBooks);
+            setHeader(header);
             setSearch(text);
         }
     }
 
     return (
         <ScrollView >
+            <Text style={[styles.h2Font, { paddingLeft: 7, fontSize: 25 }]}>{header}</Text>
             {search ? (filteredData.map((element, index) => {
                 return (
                     <View key={index}>
                         <PaperP>
                             <List.Item
                                 left={props => (
-                                    <Image {...props}
+                                    element.imageURL ? (<Image {...props}
                                         style={{ width: 66, height: 95 }}
                                         source={element.imageURL}
-                                    />
+                                    />) : <MaterialCommunityIcons name='image-off-outline' size={50} style={{ alignSelf: 'center', padding: 7 }} />
                                 )}
                                 title={element.title}
                                 description={element.author}
@@ -95,10 +102,10 @@ function BookSearch() {
                             <PaperP>
                                 <List.Item
                                     left={props => (
-                                        <Image {...props}
+                                        element.imageURL ? (<Image {...props}
                                             style={{ width: 66, height: 95 }}
                                             source={element.imageURL}
-                                        />
+                                        />) : <MaterialCommunityIcons name='image-off-outline' size={50} style={{ alignSelf: 'center', padding: 7 }} />
                                     )}
                                     title={element.title}
                                     description={element.author}

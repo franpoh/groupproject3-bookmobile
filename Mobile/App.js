@@ -25,7 +25,7 @@ import SplashScreen from './components/splash';
 
 const GeneralStack = createNativeStackNavigator();
 
-const GeneralStackScreen = () => {    
+const GeneralStackScreen = () => {
 
     return (
         <View style={{ flex: 1 }} collapsable={false}>
@@ -36,9 +36,9 @@ const GeneralStackScreen = () => {
                 }}
             >
                 <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
-                <GeneralStack.Screen 
-                    name="Book Details" 
-                    component={BookDetailsScreen} 
+                <GeneralStack.Screen
+                    name="Book Details"
+                    component={BookDetailsScreen}
                     options={{
                         headerBackVisible: false,
                         headerBackTitleVisible: false // not working on web emulator
@@ -74,7 +74,8 @@ const UploadStackScreen = () => {
             </UploadStack.Navigator>
         </View>
 
-)};
+    )
+};
 
 
 // For Paper's BottomNavigation:
@@ -96,7 +97,7 @@ const RootStackScreen = ({ userToken }) => {
         >
             <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
-                    name='Book List'                    
+                    name='Book List'
                     component={GeneralStackScreen}
                     initialParams={{ userToken: userToken }}
                     options={{
