@@ -23,36 +23,38 @@ import SplashScreen from './components/splash';
 // Workaround: https://github.com/software-mansion/react-native-screens/issues/1197#issuecomment-993682256
 // Will probably be fixed in the future
 
-const BookStack = createNativeStackNavigator();
+const GeneralStack = createNativeStackNavigator();
 
-const BookStackScreen = () => {
+const GeneralStackScreen = () => {
     return (
         <View style={{ flex: 1 }} collapsable={false}>
-            <BookStack.Navigator
+            <GeneralStack.Navigator
+                initialRouteName='Books'
+                screenOptions={{
+                    headerShown: false
+                }}
+            >
+                <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
+                <GeneralStack.Screen name="Book Details" component={BookDetailsScreen} />
+            </GeneralStack.Navigator>
+        </View>
+    )
+}
+
+const UploadStack = createNativeStackNavigator();
+
+const UploadStackScreen = () => {
+    return (
+        <View style={{ flex: 1 }} collapsable={false}>
+            <UploadStack.Navigator
                 initialRouteName='Upload Book'
                 screenOptions={{
                     headerShown: false
                 }}
             >
-                <BookStack.Screen name='Upload Book' component={UploadBookScreen} />
-                <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
-                <BookStack.Screen name="Review Upload" component={UploadReviewScreen} />
-            </BookStack.Navigator>
-        </View>
-    )
-}
-
-const GeneralStack = () => {
-    return (
-        <View style={{ flex: 1 }} collapsable={false}>
-            <BookStack.Navigator
-                initialRouteName='Books'
-
-            >
-                <BookStack.Screen name="Book Loop" component={BookListScreen} />
-                <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
-                <BookStack.Screen name="Upload Review" component={UploadReviewScreen} />
-            </BookStack.Navigator>
+                <UploadStack.Screen name='Upload Book' component={UploadBookScreen} />
+                <UploadStack.Screen name="Upload Review" component={UploadReviewScreen} />
+            </UploadStack.Navigator>
         </View>
     )
 }
@@ -67,7 +69,6 @@ const GeneralStack = () => {
 const RootStack = createMaterialBottomTabNavigator();
 
 const RootStackScreen = ({ userToken }) => {
-    console.log("In Stack", userToken);
     return (
         <RootStack.Navigator
             initialRouteName='Books'
@@ -78,8 +79,7 @@ const RootStackScreen = ({ userToken }) => {
             <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
                     name='Book List'
-                    // component={BookListScreen}
-                    component={GeneralStack}
+                    component={GeneralStackScreen}
                     options={{
                         tabBarLabel: 'Book List',
                         tabBarIcon: ({ color }) => (
@@ -111,7 +111,7 @@ const RootStackScreen = ({ userToken }) => {
 
                     <RootStack.Screen
                         name='Book Upload'
-                        component={BookStackScreen}
+                        component={UploadStackScreen}
                         options={{
                             tabBarLabel: 'Book Upload',
                             tabBarIcon: ({ color }) => (
@@ -183,23 +183,21 @@ export default function App() {
     const [isLoading, setIsLoading] = React.useState(true);
     const [userToken, setUserToken] = React.useState(null);
 
-    const authContext = React.useMemo(() => { // useMemo cache a value so that it does not need to be recalculated
-        return {
-            signIn: () => {
-                setIsLoading(false);
-                setUserToken("mellon");
-            },
-            signUp: () => {
-                setIsLoading(false);
-                setUserToken("mellon");
-            },
-            signOut: () => {
-                setIsLoading(false);
-                setUserToken(null);
-            },
-            user: userToken,
-        };
-    }, []);
+    const authContext = { // can be wrapped with useMemo, but we want 'user' to refresh
+        signIn: () => {
+            setIsLoading(false);
+            setUserToken("mellon");
+        },
+        signUp: () => {
+            setIsLoading(false);
+            setUserToken("mellon");
+        },
+        signOut: () => {
+            setIsLoading(false);
+            setUserToken(null);
+        },
+        user: userToken,
+    }
 
     React.useEffect(() => {
         setTimeout(() => {
