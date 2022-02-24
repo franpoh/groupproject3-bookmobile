@@ -10,11 +10,11 @@ import colours from './style_constants/colours';
 import AuthContext from './context';
 
 import AccountScreen from './screens/account';
-import WishlistScreen from './test/wishlistindex';
+import WishlistScreen from './screens/wishlist';
 import LoginScreen from './screens/login';
 import SignUpScreen from './screens/signup';
 import BookDetailsScreen from './screens/book_details';
-import BookListScreen from './test/booklistindex';
+import BookListScreen from './screens/book_list';
 import UploadBookScreen from './screens/upload_book';
 import UploadReviewScreen from './screens/upload_review';
 import SplashScreen from './components/splash';
@@ -23,35 +23,38 @@ import SplashScreen from './components/splash';
 // Workaround: https://github.com/software-mansion/react-native-screens/issues/1197#issuecomment-993682256
 // Will probably be fixed in the future
 
-const BookStack = createNativeStackNavigator();
+const GeneralStack = createNativeStackNavigator();
 
-const BookStackScreen = () => {
+const GeneralStackScreen = () => {
     return (
         <View style={{ flex: 1 }} collapsable={false}>
-            <BookStack.Navigator
+            <GeneralStack.Navigator
+                initialRouteName='Books'
+                screenOptions={{
+                    headerShown: false
+                }}
+            >
+                <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
+                <GeneralStack.Screen name="Book Details" component={BookDetailsScreen} />
+            </GeneralStack.Navigator>
+        </View>
+    )
+}
+
+const UploadStack = createNativeStackNavigator();
+
+const UploadStackScreen = () => {
+    return (
+        <View style={{ flex: 1 }} collapsable={false}>
+            <UploadStack.Navigator
                 initialRouteName='Upload Book'
                 screenOptions={{
                     headerShown: false
                 }}
             >
-                <BookStack.Screen name='Upload Book' component={UploadBookScreen} />
-                <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
-                <BookStack.Screen name="Review Upload" component={UploadReviewScreen} />
-            </BookStack.Navigator>
-        </View>
-    )
-}
-
-const GeneralStack = () => {
-    return (
-        <View style={{ flex: 1 }} collapsable={false}>
-            <BookStack.Navigator
-                initialRouteName='Books'
-            >
-                <BookStack.Screen name="Book Loop" component={BookListScreen} />
-                <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
-                <BookStack.Screen name="Upload Review" component={UploadReviewScreen} />
-            </BookStack.Navigator>
+                <UploadStack.Screen name='Upload Book' component={UploadBookScreen} />
+                <UploadStack.Screen name="Upload Review" component={UploadReviewScreen} />
+            </UploadStack.Navigator>
         </View>
     )
 }
@@ -66,7 +69,6 @@ const GeneralStack = () => {
 const RootStack = createMaterialBottomTabNavigator();
 
 const RootStackScreen = ({ userToken }) => {
-    console.log("In Stack", userToken);
     return (
         <RootStack.Navigator
             initialRouteName='Books'
@@ -78,7 +80,7 @@ const RootStackScreen = ({ userToken }) => {
                 <RootStack.Screen
                     name='Book List'
                     // component={BookListScreen}
-                    component={GeneralStack}
+                    component={GeneralStackScreen}
                     options={{
                         tabBarLabel: 'Book List',
                         tabBarIcon: ({ color }) => (
@@ -110,7 +112,7 @@ const RootStackScreen = ({ userToken }) => {
 
                     <RootStack.Screen
                         name='Book Upload'
-                        component={BookStackScreen}
+                        component={UploadStackScreen}
                         options={{
                             tabBarLabel: 'Book Upload',
                             tabBarIcon: ({ color }) => (
@@ -182,8 +184,7 @@ export default function App() {
     const [isLoading, setIsLoading] = React.useState(true);
     const [userToken, setUserToken] = React.useState(null);
 
-    const authContext = React.useMemo(() => { // useMemo cache a value so that it does not need to be recalculated
-        return {
+    const authContext = { // can be wrapped with useMemo, but we want 'user' to refresh
             signIn: () => {
                 setIsLoading(false);
                 setUserToken("mellon");
@@ -197,8 +198,7 @@ export default function App() {
                 setUserToken(null);
             },
             user: userToken,
-        };
-    }, []);
+        }
 
     React.useEffect(() => {
         setTimeout(() => {
