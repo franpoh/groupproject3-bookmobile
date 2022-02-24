@@ -30,12 +30,14 @@ const GeneralStackScreen = () => {
         <View style={{ flex: 1 }} collapsable={false}>
             <GeneralStack.Navigator
                 initialRouteName='Books'
-                screenOptions={{
-                    headerShown: false
-                }}
             >
                 <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
-                <GeneralStack.Screen name="Book Details" component={BookDetailsScreen} />
+                <GeneralStack.Screen 
+                    name="Book Details" 
+                    component={BookDetailsScreen}
+                    screenOptions={{
+                        headerShown: false
+                    }} />
             </GeneralStack.Navigator>
         </View>
     )
