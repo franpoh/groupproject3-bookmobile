@@ -39,32 +39,6 @@ const BookDetailsScreen = ({ navigation }) => {
       />
 
       <MyButton
-        text="Buy"
-        buttonAction={
-          () => {
-            if (user === null) {
-              Alert.alert(
-                'Login',
-                "Please login or sign up first!",
-                [
-                  { text: "OK" }
-                ]
-              );
-              navigation.navigate('Login')
-            } else {
-              Alert.alert(
-                'Purchase',
-                "Book has been purchased",
-                [
-                  { text: "OK" }
-                ]
-              )
-            }
-          }
-        }
-      />
-
-      <MyButton
         text="Upload Review"
         buttonAction={
           () => {

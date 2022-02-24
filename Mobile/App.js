@@ -79,7 +79,6 @@ const RootStackScreen = ({ userToken }) => {
             <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
                     name='Book List'
-                    // component={BookListScreen}
                     component={GeneralStackScreen}
                     options={{
                         tabBarLabel: 'Book List',
@@ -185,20 +184,20 @@ export default function App() {
     const [userToken, setUserToken] = React.useState(null);
 
     const authContext = { // can be wrapped with useMemo, but we want 'user' to refresh
-            signIn: () => {
-                setIsLoading(false);
-                setUserToken("mellon");
-            },
-            signUp: () => {
-                setIsLoading(false);
-                setUserToken("mellon");
-            },
-            signOut: () => {
-                setIsLoading(false);
-                setUserToken(null);
-            },
-            user: userToken,
-        }
+        signIn: () => {
+            setIsLoading(false);
+            setUserToken("mellon");
+        },
+        signUp: () => {
+            setIsLoading(false);
+            setUserToken("mellon");
+        },
+        signOut: () => {
+            setIsLoading(false);
+            setUserToken(null);
+        },
+        user: userToken,
+    }
 
     React.useEffect(() => {
         setTimeout(() => {
