@@ -6,15 +6,11 @@ import BookSearch from "./book_search";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const BookListScreen = ({route, navigation}) => {
-  
-  const userToken = route.params.userToken;
-
-  console.log('In booklist screen',userToken);
-  
+    
   return (
   <SafeAreaView>
     <View style={{ backgroundColor: colours.baseWhite }}>
-      <BookSearch userToken={userToken} />
+      <BookSearch />
     </View>
   </SafeAreaView>
 

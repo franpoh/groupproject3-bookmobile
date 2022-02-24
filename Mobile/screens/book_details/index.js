@@ -20,10 +20,10 @@ function BookDetailsScreen({ route, navigation }) {
   console.log('in book details', user);
 
   let indexId = route.params.indexId;
-  let userToken = route.params.userToken; 
+  let userToken = user; 
   // value not being pass at General Stack
   // userToken=null;
-  userToken='melon';
+  // userToken='melon';
 
   let localIndexBooks = indexBooks;
   let localSwapBooks = swap;

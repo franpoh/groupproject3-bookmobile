@@ -5,9 +5,7 @@ import { userA, indexBooks, swap } from '../../components/test-data';
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 
 
-function BookSearch( data ) {
-
-    console.log('In booksearch component: ',data.userToken);
+function BookSearch() {
 
     const navigation = useNavigation();
     const route = useRoute();
@@ -84,7 +82,7 @@ function BookSearch( data ) {
                                 )}
                                 title={element.title}
                                 description={element.author}
-                                onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId, userToken: data.userToken })}
+                                onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId })}
                             />
                         </PaperP>
                     </View>
@@ -104,7 +102,7 @@ function BookSearch( data ) {
                                     )}
                                     title={element.title}
                                     description={element.author}
-                                    onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId, userToken: data.userToken })}
+                                    onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId })}
                                 />
                             </PaperP>
                         </View>
