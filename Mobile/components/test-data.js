@@ -352,7 +352,7 @@ const swapReviewMerged = [
         comments: 'good',
         price: 1,
         swapId: 54,
-        userId: 4,
+        userId: 3,
         availability: 'YES',
         review: 'This is not a thriller at all',
         title: 'A Confederacy of Dunces',
