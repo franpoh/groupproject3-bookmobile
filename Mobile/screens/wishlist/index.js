@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Text, View, Alert, ScrollView, TouchableHighlight } from "react-native";
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Headline, Subheading, List } from 'react-native-paper';
 const { v4: uuidv4 } = require('uuid');
-
 
 import styles from "../../style_constants/style-sheet";
 import MyButton from "../../components/button";
@@ -17,7 +17,9 @@ import { userA, indexBooks, swap } from '../../components/test-data';
 
 let trashCan = '\uD83D\uDDD1'; // trashcam emoji U+1F5D1
 
-const WishlistScreen = ({ navigation }) => {
+const WishlistScreen = () => {
+
+  const navigation = useNavigation();
 
   let localIndexBooks = indexBooks;
   let localSwapBooks = swap;
@@ -64,13 +66,9 @@ const WishlistScreen = ({ navigation }) => {
           return (
             <View style={styles.rowSpaceBtwn}>
               <View style={{ flex: 6 }}>
-                <TouchableHighlight onPress={() => {Alert.alert(
-                  'Jumping to',
-                  `Book Details of Book ID ${indexId} which is currently not assigned :D`,
-                  [
-                    { text: "OK" }
-                  ]
-                )}}>
+                <TouchableHighlight onPress={() => {                  
+                  navigation.navigate("Book Details", { screen: "Book Details", indexId: indexId })
+                }}>
                   <Text>{matchIndex[0].title}</Text>
                 </TouchableHighlight>                
               </View>
@@ -96,7 +94,7 @@ const WishlistScreen = ({ navigation }) => {
           [
             { text: "Cancel" },
             {
-              test: 'OK',
+              text: 'OK',
               onPress: () => {                
                 const updateWishlist =removeBookfromWishList({
                   indexId: data.indexIdValue,

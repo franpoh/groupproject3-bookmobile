@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { View, Text, TouchableHighlight } from "react-native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
@@ -31,14 +31,28 @@ const GeneralStackScreen = () => {
         <View style={{ flex: 1 }} collapsable={false}>
             <GeneralStack.Navigator
                 initialRouteName='Books'
+                screenOptions={{
+                    headerShown: true
+                }}
             >
                 <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
                 <GeneralStack.Screen 
                     name="Book Details" 
-                    component={BookDetailsScreen}
-                    screenOptions={{
-                        headerShown: false
-                    }} />
+                    component={BookDetailsScreen} 
+                    options={{
+                        headerBackVisible: false,
+                        headerBackTitleVisible: false // not working on web emulator
+                        // headerLeft: () => {
+                        //     const navigation = useNavigation();
+                        //     let xx = '<';
+                        //     return (
+                        //         <TouchableHighlight onPress={() => navigation.goBack()} >
+                        //             <Text>{xx}</Text>
+                        //         </TouchableHighlight>
+                        //     )
+                        // }
+                    }}
+                />
             </GeneralStack.Navigator>
         </View>
     )

@@ -1,7 +1,8 @@
+import { Text, View, Alert, ScrollView, TouchableHighlight } from "react-native";
 // requires parent to pass indexId, userWishList as object keys
 
 export default function addBooktoWishList (data) {
-    console.log('data: ', data);
+    
     console.log(`adding ${data.indexId}`);
     let xx;
     
