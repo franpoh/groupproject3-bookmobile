@@ -10,6 +10,8 @@ import AuthContext from "../../context";
 import colours from "../../style_constants/colours";
 
 import addBooktoWishList from "../wishlist/add-book-wishlist";
+import removeBookfromWishList from "../wishlist/remove-book-wishlist";
+import grabABook from "./grab-book";
 
 import { userA, indexBooks, swap } from '../../components/test-data';
 
@@ -17,24 +19,24 @@ function BookDetailsScreen({ route, navigation }) {
 
   const { user } = React.useContext(AuthContext);
 
-  console.log('in book details', user);
+  // console.log('in book details', user);
 
   let indexId = route.params.indexId;
-  let userToken = user; 
-  // value not being pass at General Stack
-  // userToken=null;
-  // userToken='melon';
+  let userToken = user;
 
   let localIndexBooks = indexBooks;
   let localSwapBooks = swap;
-  let localUser = userA;
 
-  if (localUser.wishlist === null) { localUser.wishlist = []}; 
+  const [localUser, updateLocalUser] = useState(userA);  
+
+  // localUser.points = 0; // for testing when points unable to purchase books
+
+  if (localUser.wishlist === null) { localUser.wishlist = [] }; 
 
   const matchIndex = localIndexBooks.filter(data => data.indexId === indexId);
-  const matchSwap = localSwapBooks.filter(data => (data.indexId === indexId && data.availability === 'YES')); // check swap for YES/NO
+  // const matchSwap = localSwapBooks.filter(data => (data.indexId === indexId && data.availability === 'YES')); // check swap for YES/NO
 
-  console.log('matchSwap: ', matchSwap);
+  const [ matchSwap, updateMatchSwap ] = useState(localSwapBooks.filter(data => (data.indexId === indexId && data.availability === 'YES')));
 
   const [ userWishlist, updateUserWishlist ] = useState(localUser.wishlist);
 
@@ -56,41 +58,60 @@ function BookDetailsScreen({ route, navigation }) {
   function WishButton() {   
 
     return (
-      <MyButton
-        text={currentBookWish ? "In Wishlist" : "Add to Wishlist"}
-        buttonAction={
-          () => {
-            if (currentBookWish) {
-              
-            } else if (userToken != null) {
-              const updateWishlist =addBooktoWishList({
-                indexId: indexId,
-                userWishlist: userWishlist
-              });
-
-              console.log(updateWishlist);
-              updateUserWishlist(updateWishlist);  
-              updateCurrentBookWish(!currentBookWish);          
-            };            
-          }
-        }
-      />
+      <TouchableHighlight 
+        style={[styles.rowSpaceBtwn, { 
+          flex: 1,
+          backgroundColor: currentBookWish ? colours.secondaryLight : 'transparent',
+          justifyContent:'center',            
+          borderWidth:1, 
+          borderColor: colours.secondaryLight,
+          marginBottom: 10             
+        }]}
+        onPress={() => {
+          if (userToken === null) {
+            return;
+          } else if (currentBookWish) {
+            const updateWishlist = removeBookfromWishList({
+              indexId: indexId,
+              userWishlist: userWishlist
+            });
+            // console.log(updateWishlist);
+            updateUserWishlist(updateWishlist);
+            updateCurrentBookWish(!currentBookWish);
+          } else if (userToken != null) {
+            const updateWishlist = addBooktoWishList({
+              indexId: indexId,
+              userWishlist: userWishlist
+            });
+            // console.log(updateWishlist);
+            updateUserWishlist(updateWishlist);
+            updateCurrentBookWish(!currentBookWish);
+          };
+        }}>
+        { currentBookWish ? <Text>IN WISHLIST</Text> : <Text>ADD TO WISHLIST</Text> }
+      </TouchableHighlight>
     )
   };
 
   function UploadReviewButton() {
 
     return (
-      <MyButton
-        text="Upload a review"
-        buttonAction={
-          () => {
-            if (userToken != null) {            
-              navigation.navigate("Review Upload", {screen: "Review Upload"});              
-            };            
-          }
-        }
-      />
+      <TouchableHighlight 
+        style={[styles.rowSpaceBtwn, { 
+          flex: 1,
+          backgroundColor: colours.secondaryLight,
+          justifyContent:'center',            
+          borderWidth:1, 
+          borderColor: colours.secondaryLight,
+          marginBottom: 10,
+        }]}
+        onPress={() => {
+          if (userToken != null) {
+            navigation.navigate("Review Upload", {screen: "Review Upload"});
+          };
+        }}>
+        <Text>UPLOAD A REVIEW</Text>
+      </TouchableHighlight>
     )
   };
 
@@ -101,33 +122,80 @@ function BookDetailsScreen({ route, navigation }) {
       return <View></View>
     };
 
-    return matchSwap.map((props) => {
+    return matchSwap.map((swapItem) => {
 
-      console.log('at map',props);
-
-      const swapItem = props;
-
-      return <List.Item key={indexId} titleStyle={{ fontSize:1 }} description={props => {
-
-        console.log('at list item',props);
+      return <List.Item key={swapItem.swapId} titleStyle={{ fontSize:1 }} description={props => {
 
         return (
-          <View style={styles.rowSpaceBtwn}>
-            <View style={{ flex: 6 }}>
-              <TouchableHighlight onPress={() => {Alert.alert(
-                'Purchase Copy',
-                `By user ${swapItem.userId}`,
-                [
-                  { text: "OK" }
-                ]
-              )}}>
-                <Text>copy</Text>
-              </TouchableHighlight>                
-            </View>
-            {/* <View style={{ flex: 1 }}>                
-              { !showDel && (matchSwap.length > 0) && <Text style={{ color: colours.secondaryDark, alignSelf: 'flex-end' }}>Avail</Text> }
-              { showDel && <RemoveIcon indexIdValue={indexId} bookTitleValue={matchIndex[0].title} wishListValue={userWishlist} />}
-            </View> */}
+          <View style={[styles.rowSpaceBtwn, { marginVertical: -10 }]}>            
+              <TouchableHighlight 
+                style={{ padding: 4, borderWidth: 1, flex: 1 }}
+                onPress={() => {
+                  if (userToken === null) { // if no token
+                    return;
+                  };
+
+                  Alert.alert(
+                    'Are you sure?',
+                    `Buy copy of '${matchIndex[0].title}'`,
+                    [
+                      { text: "Cancel" },
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          
+                          if (localUser.points < swapItem.price) { // 1st round check for points
+                            Alert.alert(
+                              'Error',
+                              `You do not have enough points`,
+                              [
+                                { text: "OK" }
+                              ]
+                            );
+                            return;
+                          };
+
+                          let grabProcess = grabABook({
+                            swapItem: swapItem,                    
+                            localUser: localUser
+                          });
+        
+                          if (grabProcess.status === 'Point Fail') { // failed transaction
+                            console.log(grabProcess.status);
+                            return;
+                          };
+        
+                          if (grabProcess.status === 'Swap Fail') { // failure at swap availability
+                            console.log(grabProcess.status);
+                            // CAPSTONE need to trigger actual refresh of swap inventory from DB 
+                            updateMatchSwap(localSwapBooks.filter(data => (data.indexId === indexId && data.availability === 'YES')));
+                            return;
+                          };
+        
+                          if (grabProcess.status === 'Swap Done') { // transaction complete
+                            console.log(grabProcess.status);
+                            // CAPSTONE need to trigger actual refresh of swap inventory from DB, below is mock edits
+                            const newlocalSwap = [...localSwapBooks];
+                            const targetIndex = localSwapBooks.findIndex(aa => aa.swapId === swapItem.swapId);
+                            newlocalSwap[targetIndex].availability = 'NO';
+                            updateMatchSwap(newlocalSwap.filter(data => (data.indexId === indexId && data.availability === 'YES')));
+
+                            // CAPSTONE trigger wishlist update so book indexID removed from user wishlist since bought
+                            const updateWishlist = removeBookfromWishList({
+                              indexId: indexId,
+                              userWishlist: userWishlist
+                            });
+                            updateUserWishlist(updateWishlist);
+                            updateCurrentBookWish(!currentBookWish);
+                            return;
+                          };
+                        }
+                      } 
+                    ]
+                  )
+              }}>
+                <Text>Condition: {swapItem.comments}, User: {swapItem.userId}, Points: {swapItem.price}</Text>
+              </TouchableHighlight>
           </View>
         
         ) 
@@ -147,7 +215,7 @@ function BookDetailsScreen({ route, navigation }) {
   <View style={styles.container}>
     
       <PaperP>
-      <View style={[styles.contentArea, { marginTop: 0 }]}>
+      <View style={[styles.contentArea, { marginTop: -10 }]}>
         <View style={[styles.rowSpaceBtwn, { height: 150, paddingBottom: 10, justifyContent: 'flex-start' }]}>
           <Text style={[styles.textBold, { flex: 3 }]}>{matchIndex[0].title}</Text>
           {(matchIndex[0].imageURL != null) ? <Image source={matchIndex[0].imageURL} resizeMode='contain' style={{ width: 100, height: 150, flex: 1 }} />: <View></View>}          
@@ -161,37 +229,24 @@ function BookDetailsScreen({ route, navigation }) {
 
         <View style={{ opacity: (userToken != null) ? 1: 0.5 }}>
 
-          <View style={styles.rowSpaceBtwn}>
+          <View style={[styles.rowSpaceBtwn, { marginBottom:10 }]}>
             <Text>Current available points: { (userToken != null) ? localUser.points : <Text> You are not logged in</Text>}</Text>
           </View>
 
-          <View style={[styles.rowSpaceBtwn, { alignItems: 'stretch', flexDirection: 'column', marginBottom: 10 }]}>
-            <WishButton />            
-          </View>
+          <WishButton />
 
-          <View style={[styles.rowSpaceBtwn, { alignItems: 'stretch', flexDirection: 'column', marginBottom: 10 }]}>
-            <UploadReviewButton />            
-          </View>
+          <UploadReviewButton />
+          
           <Divider />          
           
-          {(matchSwap.length != 0) ? <List.Section><DisplaySwapInventory /></List.Section> : <Text>Currently no copies available</Text>}         
-          
-        </View>    
-
-    {/* <MyButton
-      text="Buy"
-      buttonAction={
-        () => {
-          Alert.alert(
-            'Placeholder',
-            "Book has been purchased",
-            [
-              { text: "OK" }
-            ]
-          )
-        }
-      }
-    />    */}
+          {(matchSwap.length != 0) ? 
+            <List.Section>
+              <List.Subheader>Inventory available: {matchSwap.length}</List.Subheader>
+              <DisplaySwapInventory />
+            </List.Section>
+             : <Text>Currently not in inventory</Text>
+          }          
+        </View>
     </View>
     </PaperP>
     

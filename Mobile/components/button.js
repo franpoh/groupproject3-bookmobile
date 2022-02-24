@@ -9,7 +9,7 @@ const MyButton = ({ text, buttonAction, propStyle }) => {
             mode="contained" 
             color={colours.secondaryLight}
             onPress={buttonAction}
-            style={propStyle}
+            style={propStyle}            
         >
             {text}
         </Button>

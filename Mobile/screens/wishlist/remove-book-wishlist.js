@@ -1,7 +1,7 @@
 // requires parent to pass indexId, userWishList as object keys
 
 export default function removeBookfromWishList (data) {
-    console.log('data: ', data);
+    
     console.log(`removing ${data.indexId}`);
     let xx;
     
