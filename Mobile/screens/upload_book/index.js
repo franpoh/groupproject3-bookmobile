@@ -138,7 +138,6 @@ return (
                   { text: "OK" }
                 ]
               );
-              console.log({newSwapTitle});
               setNewSwapTitle("");
               setNewSwapAuthor("");
               navigation.navigate("Book Upload");
