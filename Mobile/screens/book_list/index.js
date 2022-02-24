@@ -5,13 +5,15 @@ import colours from "../../style_constants/colours";
 import BookSearch from "./book_search";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const BookListScreen = () => (
+const BookListScreen = ({route, navigation}) => {
+    
+  return (
   <SafeAreaView>
     <View style={{ backgroundColor: colours.baseWhite }}>
       <BookSearch />
     </View>
   </SafeAreaView>
 
-);
+)};
 
 export default BookListScreen;

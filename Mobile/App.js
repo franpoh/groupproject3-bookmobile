@@ -25,11 +25,13 @@ import SplashScreen from './components/splash';
 
 const GeneralStack = createNativeStackNavigator();
 
-const GeneralStackScreen = () => {
+const GeneralStackScreen = () => {    
+
     return (
         <View style={{ flex: 1 }} collapsable={false}>
             <GeneralStack.Navigator
                 initialRouteName='Books'
+<<<<<<< HEAD
             >
                 <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
                 <GeneralStack.Screen 
@@ -38,6 +40,16 @@ const GeneralStackScreen = () => {
                     screenOptions={{
                         headerShown: false
                     }} />
+=======
+                // screenOptions={{
+                //     headerShown: true
+                // }}
+            >
+                <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
+                <GeneralStack.Screen name="Book Details" component={BookDetailsScreen} screenOptions={{
+                    headerShown: false
+                }}/>
+>>>>>>> main
             </GeneralStack.Navigator>
         </View>
     )
@@ -58,8 +70,9 @@ const UploadStackScreen = () => {
                 <UploadStack.Screen name="Upload Review" component={UploadReviewScreen} />
             </UploadStack.Navigator>
         </View>
-    )
-}
+
+)};
+
 
 // For Paper's BottomNavigation:
 // For integration with React Navigation, you can use react-navigation-material-bottom-tabs and consult createMaterialBottomTabNavigator documentation
@@ -80,8 +93,9 @@ const RootStackScreen = ({ userToken }) => {
         >
             <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                 <RootStack.Screen
-                    name='Book List'
+                    name='Book List'                    
                     component={GeneralStackScreen}
+                    initialParams={{ userToken: userToken }}
                     options={{
                         tabBarLabel: 'Book List',
                         tabBarIcon: ({ color }) => (

@@ -82,7 +82,7 @@ function BookSearch() {
                                 )}
                                 title={element.title}
                                 description={element.author}
-                                onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
+                                onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId })}
                             />
                         </PaperP>
                     </View>
@@ -102,7 +102,7 @@ function BookSearch() {
                                     )}
                                     title={element.title}
                                     description={element.author}
-                                    onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
+                                    onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId })}
                                 />
                             </PaperP>
                         </View>

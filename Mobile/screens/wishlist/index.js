@@ -21,12 +21,12 @@ const WishlistScreen = ({ navigation }) => {
 
   let localIndexBooks = indexBooks;
   let localSwapBooks = swap;
+  let localUser = userA;
 
-  if (userA.wishlist === null) { userA.wishlist = []};
-  let localindexBooks
+  if (localUser.wishlist === null) { localUser.wishlist = []};  
 
   const [ showDel, setShowDel ] = useState(false);
-  const [ userWishlist, updateUserWishlist ] = useState(userA.wishlist);
+  const [ userWishlist, updateUserWishlist ] = useState(localUser.wishlist);
 
   function CheckList () {
 
@@ -53,7 +53,7 @@ const WishlistScreen = ({ navigation }) => {
     return userWishlist.map(
       (indexId) => {
         // console.log(indexId);
-        const matchIndex = localIndexBooks.filter(data => data.indexId === indexId); // check for title name in index
+        const matchIndex = localIndexBooks.filter(data => data.indexId === indexId); // check index to obtain title name
         if (matchIndex.length === 0) {
           return <View></View>; // in rare event wishlist and index indexID become desync (eg, wishlist keeps IndexId 4 but 4 somehow deleted from Idex inventory DB)
         };

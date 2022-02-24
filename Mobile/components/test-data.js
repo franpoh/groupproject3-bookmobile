@@ -57,10 +57,10 @@ const indexBooks = [
         author: 'Alice Walker',
         year: 1980,
         genreId: 1,
-        imageURL: {
-            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/2v05vz7oibe2oh00d0jng1amrir9',
-        }
-
+        // imageURL: {
+        //     uri: 'https://d3i5mgdwi2ze58.cloudfront.net/2v05vz7oibe2oh00d0jng1amrir9',
+        // }      
+        imageURL: null,
     },
     {
         indexId: 7,
