@@ -9,7 +9,10 @@ import { userA, indexBooks, swap } from '../../components/test-data';
 
 // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 // https://reactnavigation.org/docs/connecting-navigation-prop/
-function GetBooks() {
+function GetBooks( data ) {
+
+    console.log('In getbooks component: ',data.userToken);
+
     const navigation = useNavigation();
     let localIndexBooks = indexBooks;
     let localSwapBooks = swap;
@@ -29,7 +32,7 @@ function GetBooks() {
                         )}
                         title={element.title}
                         description={element.author}
-                        onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
+                        onPress={() => navigation.navigate("Book Details", { screen: "Book Details" , indexId: element.indexId, userToken: data.userToken })}
                     />
                 </View>
             </View>

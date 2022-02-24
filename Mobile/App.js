@@ -10,11 +10,11 @@ import colours from './style_constants/colours';
 import AuthContext from './context';
 
 import AccountScreen from './screens/account';
-import WishlistScreen from './test/wishlistindex';
+import WishlistScreen from './screens/wishlist';
 import LoginScreen from './screens/login';
 import SignUpScreen from './screens/signup';
 import BookDetailsScreen from './screens/book_details';
-import BookListScreen from './test/booklistindex';
+import BookListScreen from './screens/book_list';
 import UploadBookScreen from './screens/upload_book';
 import UploadReviewScreen from './screens/upload_review';
 import SplashScreen from './components/splash';
@@ -42,19 +42,26 @@ const BookStackScreen = () => {
     )
 }
 
-const GeneralStack = () => {
+const GeneralStack = ( data ) => {
+    
+    data.route.params.userToken = 'seed'; // for testing
+
+    console.log('in General Stack: ', data.route.params.userToken);
+    
+
     return (
         <View style={{ flex: 1 }} collapsable={false}>
             <BookStack.Navigator
-                initialRouteName='Books'
+                initialRouteName='Books'                
             >
-                <BookStack.Screen name="Book Loop" component={BookListScreen} />
+                <BookStack.Screen name="Book Loop" component={BookListScreen} initialParams={{ userToken: data.route.params.userToken }} />
                 <BookStack.Screen name="Book Details" component={BookDetailsScreen} />
                 <BookStack.Screen name="Upload Review" component={UploadReviewScreen} />
             </BookStack.Navigator>
         </View>
-    )
-}
+
+)};
+
 
 // For Paper's BottomNavigation:
 // For integration with React Navigation, you can use react-navigation-material-bottom-tabs and consult createMaterialBottomTabNavigator documentation
@@ -79,6 +86,7 @@ const RootStackScreen = ({ userToken }) => {
                     name='Book List'
                     // component={BookListScreen}
                     component={GeneralStack}
+                    initialParams={{ userToken: userToken }}
                     options={{
                         tabBarLabel: 'Book List',
                         tabBarIcon: ({ color }) => (

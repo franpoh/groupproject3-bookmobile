@@ -7,7 +7,13 @@ import colours from "../../style_constants/colours";
 import GetBooks from "./getBooks";
 import BookSearch from "./components/book_search";
 
-const BookListScreen = ({ navigation }) => (
+const BookListScreen = ({ route, navigation }) => {
+
+  const userToken = route.params.userToken;
+
+  console.log('In booklist screen',userToken);
+
+  return (
   <ScrollView>
     <View>
       {/* <Text style={styles.h1Font}>Welcome to Book Loop!</Text> */}
@@ -15,10 +21,10 @@ const BookListScreen = ({ navigation }) => (
     </View>
     <View style={{ backgroundColor: colours.baseWhite }}>
       <Text style={styles.h2Font}>Featured</Text>
-      <GetBooks />
+      <GetBooks userToken={userToken} />
     </View>
     <View style={styles.container}>
-      <Text>Book List</Text>
+      {/* <Text>Book List</Text>
 
       <MyButton
         text="Book Details"
@@ -50,7 +56,7 @@ const BookListScreen = ({ navigation }) => (
             )
           }
         }
-      />
+      /> */}
 
       {/* <MyButton
         text="Reviews upload"
@@ -63,6 +69,6 @@ const BookListScreen = ({ navigation }) => (
     </View>
   </ScrollView>
 
-);
+)};
 
 export default BookListScreen;

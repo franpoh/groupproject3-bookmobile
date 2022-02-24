@@ -54,10 +54,9 @@ const indexBooks = [
         author: 'Name of author5',
         year: 1980,
         genreId: 1,
-        imageURL: {
-            uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
-        }
-
+        // imageURL: {
+        //     uri: 'https://cdn.pastemagazine.com/www/system/images/photo_albums/best-book-covers-fall-2019/large/bbcdune.jpg?1384968217',
+        imageURL: null,
     },
     {
         indexId: 7,
