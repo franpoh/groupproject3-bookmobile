@@ -13,6 +13,23 @@ const styles = StyleSheet.create({
         padding: 20
     },
 
+    containerStart: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: 20
+    },
+
+    containerAlt: {
+        flex: 0.5,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+
+    alignCentre: {
+        alignSelf: "center"
+    },
+
     h1Font: {
         fontFamily: fontType,
         fontSize: 40,
@@ -56,19 +73,24 @@ const styles = StyleSheet.create({
     },
 
     contentArea: { // g1        
-        width: win.width*.95,
-        marginTop: win.width*.05,
+        width: win.width * .95,
+        marginTop: win.width * .05,
         // borderWidth: 1,
         // borderColor: 'red'
     },
 
     rowSpaceBtwn: { // g1
-        flexDirection: "row",    
+        flexDirection: "row",
         justifyContent: 'space-between',
-        height: 40,        
+        height: 40,
         alignItems: 'center',
         // borderWidth: 1,
         // borderColor: 'red'
+    },
+    textBox: { 
+        height: 50,
+        width: 300,
+        marginTop: 20
     },
 })
 
