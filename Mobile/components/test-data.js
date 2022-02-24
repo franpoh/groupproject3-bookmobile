@@ -4,7 +4,8 @@ export {
     indexBooks,
     swap,
     reviews,
-    swapReviewMerged
+    swapReviewMerged,
+    uploadedReviews
 };
 
 const userA = {
@@ -370,3 +371,9 @@ const swapReviewMerged = [
         author: 'Salman Rushdie'
     }
 ]
+
+const uploadedReviews = [
+    "It was a wild ride from the start to the end!",
+    "It blew my mind and I had to spend all Saturday cleaning up, 1 star.",
+    "It was the perfect accompaniment to red wine, but a little hard to digest."
+];
