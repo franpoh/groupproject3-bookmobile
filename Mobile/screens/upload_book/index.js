@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, Alert, ScrollView, TouchableHighlight, Image } from "react-native";
-import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Headline, Subheading, List } from 'react-native-paper';
+import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Headline, Subheading, List, TextInput } from 'react-native-paper';
 const { v4: uuidv4 } = require('uuid');
 import styles from "../../style_constants/style-sheet";
 import MyButton from "../../components/button";
@@ -10,6 +10,9 @@ import { userB, indexBooks, swap } from '../../components/test-data';
 import {RetrieveUserSwapYes, RetrieveUserSwapNo} from "./components/retrieveuserswap";
 
 const UploadBookScreen = ( { navigation } ) => {
+  const [newSwapAuthor, setNewSwapAuthor] = React.useState("");
+  const [newSwapTitle, setNewSwapTitle] = React.useState("");
+
   const userId = userB.userId;
   const filtered = swap.filter(data => (data.userId == userId))
 
@@ -30,7 +33,7 @@ const UploadBookScreen = ( { navigation } ) => {
   function GenerateUserSwapYes() {
     const navigation = useNavigation();
     const retrieveUserSwapYes = RetrieveUserSwapYes();
-    console.log("Retrieved User Swap Yes Details:", retrieveUserSwapYes)
+    // console.log("Retrieved User Swap Yes Details:", retrieveUserSwapYes)
     
     return retrieveUserSwapYes.map((element => {
       return (
@@ -58,7 +61,7 @@ const UploadBookScreen = ( { navigation } ) => {
   function GenerateUserSwapNo() {
     const navigation = useNavigation();
     const retrieveUserSwapNo = RetrieveUserSwapNo();
-    console.log("Retrieved User Swap No Details:", retrieveUserSwapNo)
+    // console.log("Retrieved User Swap No Details:", retrieveUserSwapNo)
     
     return retrieveUserSwapNo.map((element => {
       return (
@@ -82,8 +85,12 @@ const UploadBookScreen = ( { navigation } ) => {
   }));
   
   };
-
-  
+  //Function Uploadbook take params price, let price = 1
+  // optional comments
+  // userid
+  // checks if there is such a book in index backend, if not create database, then addtoswap.
+  // this function also adds this book to booklist (append to array)
+  // then refresh currently uploaded books to show new list.
 
 return (
   <PaperP>
@@ -109,6 +116,16 @@ return (
           title="Upload New Book"
           left = {props => <List.Icon color={colours.primary} icon="clipboard-arrow-up-outline"/>}
         >
+          <TextInput
+            label = "Book Title"
+            value = {newSwapTitle}
+            onChangeText={text => setNewSwapTitle(text)}
+          />
+          <TextInput
+            label = "Author"
+            value = {newSwapAuthor}
+            onChangeText={text => setNewSwapAuthor(text)}
+          />
           <MyButton
           text="Upload Book"
 
@@ -116,11 +133,14 @@ return (
             () => {
               Alert.alert(
                 'Placeholder',
-                "Book has been Uploaded",
+                "Book has been Uploaded Successfully.",
                 [
                   { text: "OK" }
                 ]
               );
+              console.log({newSwapTitle});
+              setNewSwapTitle("");
+              setNewSwapAuthor("");
               navigation.navigate("Book Upload");
             }
           } 
