@@ -6,10 +6,10 @@ import styles from "../../style_constants/style-sheet";
 import MyButton from "../../components/button";
 import colours from "../../style_constants/colours";
 import { useNavigation } from '@react-navigation/native';
-import { userB, indexBooks, swap } from '../../components/test-data';
-import {RetrieveUserSwapYes, RetrieveUserSwapNo} from "./components/retrieveuserswap";
+import { userB, indexBooks, swap, retrivedUserSwapYes, retrievedUserSwapNo } from '../../components/test-data';
+// import { RetrieveUserSwapYes, RetrieveUserSwapNo } from "./components/retrieveuserswap";
 
-const UploadBookScreen = ( { navigation } ) => {
+const UploadBookScreen = ({ navigation }) => {
   const [newSwapAuthor, setNewSwapAuthor] = React.useState("");
   const [newSwapTitle, setNewSwapTitle] = React.useState("");
 
@@ -27,63 +27,63 @@ const UploadBookScreen = ( { navigation } ) => {
   //  > Alert [can put in book title, book author, image?]
   //  > Navigate to new page
   //  > TextInput and Button  
-  
+
   // const [ userUploadedBooks, updateUserUploadedBooks ] = useState(userB.uploadlist);
 
   function GenerateUserSwapYes() {
     const navigation = useNavigation();
-    const retrieveUserSwapYes = RetrieveUserSwapYes();
+    // const retrieveUserSwapYes = retrivedUserSwapYes;
     // console.log("Retrieved User Swap Yes Details:", retrieveUserSwapYes)
-    
-    return retrieveUserSwapYes.map((element => {
+
+    return retrivedUserSwapYes.map((element => {
       return (
-          <View key={element.indexId} style={{ margin: 10 }}>
-              <View>
-                  <List.Item
-                      title={element.title}
-                      description={element.author}
-                      onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
-                      right={props => (
-                          <Image {...props}
-                              style={{ width: 66, height: 95 }}
-                              source={element.imageURL}
-                          />
-                      )}
-                      
-                  />
-              </View>
+        <View key={element.indexId} style={{ margin: 10 }}>
+          <View>
+            <List.Item
+              title={element.title}
+              description={element.author}
+              onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId })}
+              right={props => (
+                <Image {...props}
+                  style={{ width: 66, height: 95 }}
+                  source={element.imageURL}
+                />
+              )}
+
+            />
           </View>
+        </View>
       )
-  }));
+    }));
 
   };
 
   function GenerateUserSwapNo() {
     const navigation = useNavigation();
-    const retrieveUserSwapNo = RetrieveUserSwapNo();
+    // const retrieveUserSwapNo = retrievedUserSwapNo;
     // console.log("Retrieved User Swap No Details:", retrieveUserSwapNo)
-    
-    return retrieveUserSwapNo.map((element => {
+
+    return retrievedUserSwapNo.map((element => {
       return (
-          <View key={element.indexId} style={{ margin: 10 }}>
-              <View>
-                  <List.Item
-                      title={element.title}
-                      description={element.author}
-                      onPress={() => navigation.navigate("Book Details", { screen: "Book Details" })}
-                      right={props => (
-                          <Image {...props}
-                              style={{ width: 66, height: 95 }}
-                              source={element.imageURL}
-                          />
-                      )}
-                      
-                  />
-              </View>
+        <View key={element.indexId} style={{ margin: 10 }}>
+          <View>
+            <List.Item
+              title={element.title}
+              description={element.author}
+              onPress={() => navigation.navigate("Book Details", { screen: "Book Details", indexId: element.indexId })}
+              right={props => (
+                <Image {...props}
+                  style={{ width: 66, height: 95 }}
+                  source={element.imageURL}
+                />
+              )}
+
+            />
           </View>
+        </View>
       )
-  }));
-  
+    }));
+
   };
   //Function Uploadbook take params price, let price = 1
   // optional comments
@@ -92,68 +92,69 @@ const UploadBookScreen = ( { navigation } ) => {
   // this function also adds this book to booklist (append to array)
   // then refresh currently uploaded books to show new list.
 
-return (
-  <PaperP>
+  return (
+    <PaperP>
 
-    <ScrollView style={styles.contentArea}>
+      <ScrollView style={styles.contentArea}>
 
         <List.Section>
-        <List.Subheader style={styles.h3Bold}>My Uploads</List.Subheader>
-        <List.Accordion
-          title="Currently Uploaded Books"
-          left={props => <List.Icon color={colours.primary} icon="clipboard-text-multiple-outline"/>}>
-          <GenerateUserSwapYes/>
+          <List.Subheader style={styles.h3Bold}>My Uploads</List.Subheader>
+          <List.Accordion
+            title="Currently Uploaded Books"
+            left={props => <List.Icon color={colours.primary} icon="clipboard-text-multiple-outline" />}>
+            <GenerateUserSwapYes />
 
-        </List.Accordion>
-        
-        <List.Accordion
-          title="Previous Uploads"
-          left={props => <List.Icon color={colours.primary} icon="clipboard-check-multiple-outline"/>}>
-          <GenerateUserSwapNo/>
-        </List.Accordion>
-        
-        <List.Accordion
-          title="Upload New Book"
-          left = {props => <List.Icon color={colours.primary} icon="clipboard-arrow-up-outline"/>}
-        >
-          <TextInput
-            label = "Book Title"
-            value = {newSwapTitle}
-            onChangeText={text => setNewSwapTitle(text)}
-          />
-          <TextInput
-            label = "Author"
-            value = {newSwapAuthor}
-            onChangeText={text => setNewSwapAuthor(text)}
-          />
-          <MyButton
-          text="Upload Book"
+          </List.Accordion>
 
-          buttonAction={ 
-            () => {
-              Alert.alert(
-                'Placeholder',
-                "Book has been Uploaded Successfully.",
-                [
-                  { text: "OK" }
-                ]
-              );
-              setNewSwapTitle("");
-              setNewSwapAuthor("");
-              navigation.navigate("Book Upload");
-            }
-          } 
-        />
-        </List.Accordion>
-        
-        
+          <List.Accordion
+            title="Previous Uploads"
+            left={props => <List.Icon color={colours.primary} icon="clipboard-check-multiple-outline" />}>
+            <GenerateUserSwapNo />
+          </List.Accordion>
 
-      </List.Section>
+          <List.Accordion
+            title="Upload New Book"
+            left={props => <List.Icon color={colours.primary} icon="clipboard-arrow-up-outline" />}
+          >
+            <TextInput
+              label="Book Title"
+              value={newSwapTitle}
+              onChangeText={text => setNewSwapTitle(text)}
+            />
+            <TextInput
+              label="Author"
+              value={newSwapAuthor}
+              onChangeText={text => setNewSwapAuthor(text)}
+            />
+            <MyButton
+              text="Upload Book"
 
-    </ScrollView>
+              buttonAction={
+                () => {
+                  Alert.alert(
+                    'Placeholder',
+                    "Book has been Uploaded Successfully.",
+                    [
+                      { text: "OK" }
+                    ]
+                  );
+                  setNewSwapTitle("");
+                  setNewSwapAuthor("");
+                  navigation.navigate("Book Upload");
+                }
+              }
+            />
+          </List.Accordion>
 
-  </PaperP>
-)};
+
+
+        </List.Section>
+
+      </ScrollView>
+
+    </PaperP>
+  )
+};
 
 export default UploadBookScreen;
 
