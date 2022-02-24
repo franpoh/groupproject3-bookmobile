@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, Alert, Image, ScrollView, TouchableHighlight } from "react-native";
-import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Headline, Subheading, List } from 'react-native-paper';
+import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Headline, Subheading, List, Dialog, TextInput, Portal } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import MyButton from "../../components/button";
@@ -13,12 +13,19 @@ import colours from "../../style_constants/colours";
 import addBooktoWishList from "../wishlist/add-book-wishlist";
 import removeBookfromWishList from "../wishlist/remove-book-wishlist";
 import grabABook from "./grab-book";
+import { ReviewList, ReviewDialog, UploadReviewButton } from "./book-review";
 
-import { userA, indexBooks, swap, reviews, swapReviewMerged } from '../../components/test-data';
+import { userA, indexBooks, swap, reviews, swapReviewMerged, uploadedReviews } from '../../components/test-data';
+import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/PixelRatio";
 
 function BookDetailsScreen({ route, navigation }) {
 
   const { user } = React.useContext(AuthContext);
+
+  // Upload Reviews
+  const [review, setReview] = React.useState("");
+  const [dialogVisible, setDialogVisible] = React.useState(false);
+  const [reviewList, setReviewList] = React.useState(uploadedReviews);
 
   // console.log('in book details', user);
 
@@ -91,28 +98,6 @@ function BookDetailsScreen({ route, navigation }) {
           };
         }}>
         {currentBookWish ? <Text>IN WISHLIST</Text> : <Text>ADD TO WISHLIST</Text>}
-      </TouchableHighlight>
-    )
-  };
-
-  function UploadReviewButton() {
-
-    return (
-      <TouchableHighlight
-        style={[styles.rowSpaceBtwn, {
-          flex: 1,
-          backgroundColor: colours.secondaryLight,
-          justifyContent: 'center',
-          borderWidth: 1,
-          borderColor: colours.secondaryLight,
-          marginBottom: 10,
-        }]}
-        onPress={() => {
-          if (userToken != null) {
-            navigation.navigate("Review Upload", { screen: "Review Upload" });
-          };
-        }}>
-        <Text>UPLOAD A REVIEW</Text>
       </TouchableHighlight>
     )
   };
@@ -210,11 +195,11 @@ function BookDetailsScreen({ route, navigation }) {
 
 
   // matchIndex[0].imageURL = null; // for testing when book has no imageURL
+  // Put provider as outermost layer, otherwise reviewdialog dark background did not render properly - Francine
   return (
-    <ScrollView>
-      <View style={styles.container}>
-
-        <PaperP>
+    <PaperP>
+      <ScrollView>
+        <View style={styles.container}>
           <View style={[styles.contentArea, { marginTop: -10 }]}>
             <View style={[styles.rowSpaceBtwn, { height: 150, paddingBottom: 10, justifyContent: 'center', alignItems: 'center' }]}>
               {(matchIndex[0].imageURL != null) ? <Image source={matchIndex[0].imageURL} resizeMode='contain' style={{ width: 100, height: 150, flex: 1, paddingRight: 25 }} /> : <MaterialCommunityIcons name='image-off-outline' size={50} style={{ alignSelf: 'center', padding: 18 }} />}
@@ -235,7 +220,15 @@ function BookDetailsScreen({ route, navigation }) {
 
               <WishButton />
 
-              <UploadReviewButton />
+              <UploadReviewButton setDialogVisible={setDialogVisible} />
+
+              <ReviewDialog
+                dialogVisible={dialogVisible}
+                setDialogVisible={setDialogVisible}
+                review={review}
+                setReview={setReview}
+                setReviewList={setReviewList}
+              />
 
               <Divider />
 
@@ -246,12 +239,14 @@ function BookDetailsScreen({ route, navigation }) {
                 </List.Section>
                 : <Text>Currently not in inventory</Text>
               }
+
+              <Text style={[styles.h3Bold, { marginBottom: 10 }]}>Community Reviews</Text>
+              <ReviewList reviewList={reviewList} />
             </View>
           </View>
-        </PaperP>
-
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </PaperP>
   )
 };
 
