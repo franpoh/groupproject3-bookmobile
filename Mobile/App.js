@@ -41,6 +41,7 @@ const GeneralStackScreen = () => {
                     component={BookDetailsScreen} 
                     options={{
                         headerBackVisible: false,
+                        headerBackTitleVisible: false // not working on web emulator
                         // headerLeft: () => {
                         //     const navigation = useNavigation();
                         //     let xx = '<';
