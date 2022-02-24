@@ -227,7 +227,7 @@ function BookDetailsScreen({ route, navigation }) {
         <Text style={{ paddingBottom: 10}}>Genre: {matchIndex[0].genreId}</Text>
         <Divider />
 
-        <View style={{ opacity: (userToken != null) ? 1: 0.5 }}>
+        <View style={{ opacity: (userToken != null) ? 1: 0.2 }}>
 
           <View style={[styles.rowSpaceBtwn, { marginBottom:10 }]}>
             <Text>Current available points: { (userToken != null) ? localUser.points : <Text> You are not logged in</Text>}</Text>
