@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, Alert, Image, ScrollView, TouchableHighlight } from "react-native";
 import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Headline, Subheading, List } from 'react-native-paper';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import MyButton from "../../components/button";
 import styles from "../../style_constants/style-sheet";
@@ -209,17 +210,15 @@ function BookDetailsScreen({ route, navigation }) {
 
 
   // matchIndex[0].imageURL = null; // for testing when book has no imageURL
-
-
   return (
     <ScrollView>
       <View style={styles.container}>
 
         <PaperP>
           <View style={[styles.contentArea, { marginTop: -10 }]}>
-            <View style={[styles.rowSpaceBtwn, { height: 150, paddingBottom: 10, justifyContent: 'flex-start' }]}>
-              <Text style={[styles.textBold, { flex: 3 }]}>{matchIndex[0].title}</Text>
-              {(matchIndex[0].imageURL != null) ? <Image source={matchIndex[0].imageURL} resizeMode='contain' style={{ width: 100, height: 150, flex: 1 }} /> : <View></View>}
+            <View style={[styles.rowSpaceBtwn, { height: 150, paddingBottom: 10, justifyContent: 'center', alignItems: 'center' }]}>
+              {(matchIndex[0].imageURL != null) ? <Image source={matchIndex[0].imageURL} resizeMode='contain' style={{ width: 100, height: 150, flex: 1, paddingRight: 25 }} /> : <MaterialCommunityIcons name='image-off-outline' size={50} style={{ alignSelf: 'center', padding: 18 }} />}
+              <Text style={[styles.textBold, { flex: 3, paddingLeft: 25 }]}>{matchIndex[0].title}</Text>
             </View>
 
             <Divider />
@@ -228,7 +227,7 @@ function BookDetailsScreen({ route, navigation }) {
             <Text style={{ paddingBottom: 10 }}>Genre: {matchIndex[0].genreId}</Text>
             <Divider />
 
-            <View style={{ opacity: (userToken != null) ? 1 : 0.5 }}>
+            <View style={{ opacity: (userToken != null) ? 1 : 0.3 }}>
 
               <View style={[styles.rowSpaceBtwn, { marginBottom: 10 }]}>
                 <Text>Current available points: {(userToken != null) ? localUser.points : <Text> You are not logged in</Text>}</Text>
