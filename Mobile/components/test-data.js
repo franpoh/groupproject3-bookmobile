@@ -3,7 +3,8 @@ export {
     userB,
     indexBooks,
     swap,
-    reviews
+    reviews,
+    swapReviewMerged
 };
 
 const userA = {
@@ -153,7 +154,7 @@ const swap = [
         comments: "good",
         indexId: 7,
         userId: 3,
-        availability: "NO"
+        availability: "YES"
     },
     {
         swapId: 44,
@@ -238,8 +239,134 @@ const reviews = [
     },
     {
         reviewId: 1,
-        review: "Not sure why _ would do that",
+        review: "This is not a thriller at all",
+        userId: 3,
+        indexId: 9
+    },
+    {
+        reviewId: 1,
+        review: "Not sure why Salman would do that",
         userId: 3,
         indexId: 2
     }
 ];
+
+// const books = indexBooks.reduce(function (p, c) {
+//     p[c.indexId] = c;
+//     return p;
+// }, {});
+
+// const book_review = reviews.map(function (c) {
+//     const d = books[c.indexId];
+//     return {
+//         indexId: c.indexId,
+//         review: c.review,
+//         // userId: c.userId,
+//         title: d.title,
+//         author: d.author
+//     }
+// });
+
+// const merged = swap.reduce(function (p, c) {
+//     p[c.indexId] = c;
+//     return p;
+// }, {});
+
+// // console.log("merged", merged)
+
+// const swap_review = book_review.map(function (c) {
+//     const d = merged[c.indexId];
+//     return {
+//         indexId: d.indexId,
+//         comments: d.comments,
+//         price: d.price,
+//         swapId: d.swapId,
+//         userId: d.userId,
+//         availability: d.availability,
+//         review: c.review,
+//         title: c.title,
+//         author: c.author
+//     }
+// });
+// console.log("swapReviewMerged:", swap_review);
+
+// outputs from commented block above
+const swapReviewMerged = [
+    {
+        indexId: 66,
+        comments: 'good',
+        price: 1,
+        swapId: 164,
+        userId: 4,
+        availability: 'YES',
+        review: 'Good for long rides',
+        title: ' Love in the Time of Cholera',
+        author: 'Gabriel Garcia Marquez'
+    },
+    {
+        indexId: 23,
+        comments: 'good',
+        price: 1,
+        swapId: 70,
+        userId: 4,
+        availability: 'YES',
+        review: 'Absolute mind blown',
+        title: 'White Teeth',
+        author: 'Zadie Smith'
+    },
+    {
+        indexId: 5,
+        comments: 'good',
+        price: 1,
+        swapId: 7,
+        userId: 3,
+        availability: 'YES',
+        review: 'Recommended. Didnt feel like 6000 pages',
+        title: 'The Color Purple',
+        author: 'Alice Walker'
+    },
+    {
+        indexId: 7,
+        comments: 'good',
+        price: 1,
+        swapId: 9,
+        userId: 3,
+        availability: 'YES',
+        review: 'Love the theme',
+        title: 'The Handmaids Tale',
+        author: 'Margaret Atwood'
+    },
+    {
+        indexId: 9,
+        comments: 'good',
+        price: 1,
+        swapId: 54,
+        userId: 4,
+        availability: 'YES',
+        review: 'Best thriller Ive read',
+        title: 'A Confederacy of Dunces',
+        author: 'John Kennedy Toole'
+    },
+    {
+        indexId: 9,
+        comments: 'good',
+        price: 1,
+        swapId: 54,
+        userId: 4,
+        availability: 'YES',
+        review: 'This is not a thriller at all',
+        title: 'A Confederacy of Dunces',
+        author: 'John Kennedy Toole'
+    },
+    {
+        indexId: 2,
+        comments: 'good',
+        price: 1,
+        swapId: 4,
+        userId: 3,
+        availability: 'YES',
+        review: 'Not sure why Salman would do that',
+        title: 'Beloved',
+        author: 'Salman Rushdie'
+    }
+]
