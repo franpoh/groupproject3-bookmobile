@@ -1,7 +1,7 @@
 // requires parent to pass indexId, userWishList as object keys
 
 export default function addBooktoWishList (data) {
-    console.log('data: ', data);
+    
     console.log(`adding ${data.indexId}`);
     let xx;
     

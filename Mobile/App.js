@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { View, Text, TouchableHighlight } from "react-native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
@@ -36,9 +36,22 @@ const GeneralStackScreen = () => {
                 }}
             >
                 <GeneralStack.Screen name="Book Loop" component={BookListScreen} />
-                <GeneralStack.Screen name="Book Details" component={BookDetailsScreen} options={{
-                    headerShown: false
-                }}/>
+                <GeneralStack.Screen 
+                    name="Book Details" 
+                    component={BookDetailsScreen} 
+                    options={{
+                        headerBackVisible: false,
+                        // headerLeft: () => {
+                        //     const navigation = useNavigation();
+                        //     let xx = '<';
+                        //     return (
+                        //         <TouchableHighlight onPress={() => navigation.goBack()} >
+                        //             <Text>{xx}</Text>
+                        //         </TouchableHighlight>
+                        //     )
+                        // }
+                    }}
+                />
             </GeneralStack.Navigator>
         </View>
     )
