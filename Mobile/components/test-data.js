@@ -6,6 +6,7 @@ export {
 
 const userA = {
     userId: 3,
+    userImage: require("../assets/user.jpg"),
     username: 'Bob',
     email: 'abc123@hmail.com',
     password: "abcdefg",
