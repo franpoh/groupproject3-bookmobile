@@ -16,7 +16,6 @@ import SignUpScreen from './screens/signup';
 import BookDetailsScreen from './screens/book_details';
 import BookListScreen from './screens/book_list';
 import UploadBookScreen from './screens/upload_book';
-import UploadReviewScreen from './screens/upload_review';
 import SplashScreen from './components/splash';
 
 // Issue: When native stacks are nested inside material bottom tabs navigator (react-navigation), navigating between tabs back and forth causes a blank screen to appear.
@@ -57,25 +56,6 @@ const GeneralStackScreen = () => {
         </View>
     )
 }
-
-const UploadStack = createNativeStackNavigator();
-
-const UploadStackScreen = () => {
-    return (
-        <View style={{ flex: 1 }} collapsable={false}>
-            <UploadStack.Navigator
-                initialRouteName='Upload Book'
-                screenOptions={{
-                    headerShown: false
-                }}
-            >
-                <UploadStack.Screen name='Upload Book' component={UploadBookScreen} />
-                <UploadStack.Screen name="Upload Review" component={UploadReviewScreen} />
-            </UploadStack.Navigator>
-        </View>
-
-    )
-};
 
 
 // For Paper's BottomNavigation:
@@ -131,7 +111,7 @@ const RootStackScreen = ({ userToken }) => {
 
                     <RootStack.Screen
                         name='Book Upload'
-                        component={UploadStackScreen}
+                        component={UploadBookScreen}
                         options={{
                             tabBarLabel: 'Book Upload',
                             tabBarIcon: ({ color }) => (
