@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
     rowSpaceBtwn: { // g1
         flexDirection: "row",
         justifyContent: 'space-between',
-        height: 40,
+        height: 41,
         alignItems: 'center',
         // borderWidth: 1,
         // borderColor: 'red'
     },
-    textBox: { 
+    textBox: {
         height: 50,
         width: 300,
         marginTop: 20
