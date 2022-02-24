@@ -4,6 +4,9 @@ import { Provider as PaperP, DefaultTheme, Card, Title, Paragraph, Divider, Head
 
 import MyButton from "../../components/button";
 import styles from "../../style_constants/style-sheet";
+
+import AuthContext from "../../context";
+
 import colours from "../../style_constants/colours";
 
 import addBooktoWishList from "../wishlist/add-book-wishlist";
@@ -11,6 +14,10 @@ import addBooktoWishList from "../wishlist/add-book-wishlist";
 import { userA, indexBooks, swap } from '../../components/test-data';
 
 function BookDetailsScreen({ route, navigation }) {
+
+  const { user } = React.useContext(AuthContext);
+
+  console.log('in book details', user);
 
   let indexId = route.params.indexId;
   let userToken = route.params.userToken; 

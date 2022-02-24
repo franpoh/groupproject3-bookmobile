@@ -1,73 +1,22 @@
 import React from "react";
 import { Text, View, Alert, ScrollView } from "react-native";
-
-import MyButton from "../../components/button";
 import styles from "../../style_constants/style-sheet";
 import colours from "../../style_constants/colours";
-import GetBooks from "./getBooks";
-import BookSearch from "./components/book_search";
+import BookSearch from "./book_search";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const BookListScreen = ({ route, navigation }) => {
-
+const BookListScreen = ({route, navigation}) => {
+  
   const userToken = route.params.userToken;
 
   console.log('In booklist screen',userToken);
-
+  
   return (
-  <ScrollView>
-    <View>
-      {/* <Text style={styles.h1Font}>Welcome to Book Loop!</Text> */}
-      <BookSearch />
-    </View>
+  <SafeAreaView>
     <View style={{ backgroundColor: colours.baseWhite }}>
-      <Text style={styles.h2Font}>Featured</Text>
-      <GetBooks userToken={userToken} />
+      <BookSearch userToken={userToken} />
     </View>
-    <View style={styles.container}>
-      {/* <Text>Book List</Text>
-
-      <MyButton
-        text="Book Details"
-        buttonAction={
-          () => {
-            navigation.navigate("Book Upload", { screen: "Book Details" });
-
-            Alert.alert(
-              'Placeholder',
-              "Jumping to book details",
-              [
-                { text: "OK" }
-              ]
-            )
-          }
-        }
-      />
-
-      <MyButton
-        text="Buy"
-        buttonAction={
-          () => {
-            Alert.alert(
-              'Placeholder',
-              "Book has been purchased",
-              [
-                { text: "OK" }
-              ]
-            )
-          }
-        }
-      /> */}
-
-      {/* <MyButton
-        text="Reviews upload"
-        buttonAction={
-          () => {
-            navigation.navigate("Review Upload", { screen: "Review Upload" });
-          }
-        }
-      /> */}
-    </View>
-  </ScrollView>
+  </SafeAreaView>
 
 )};
 
