@@ -4,7 +4,9 @@ export {
     indexBooks,
     swap,
     reviews,
-    swapReviewMerged
+    swapReviewMerged,
+    retrivedUserSwapYes,
+    retrievedUserSwapNo
 };
 
 const userA = {
@@ -30,6 +32,17 @@ const userB = {
 
 // https://thegreatestbooks.org/the-greatest-fiction-since/1980
 const indexBooks = [
+    {
+        indexId: 9,
+        title: 'A Confederacy of Dunces',
+        author: 'John Kennedy Toole',
+        year: 1980,
+        genreId: 1,
+        imageURL: {
+            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/rstxal8xk784d7288orvapc0xogl',
+        }
+
+    },
     {
         indexId: 1,
         title: 'Beloved',
@@ -71,17 +84,6 @@ const indexBooks = [
         genreId: 1,
         imageURL: {
             uri: 'https://d3i5mgdwi2ze58.cloudfront.net/tedjyaopg0lwwmpmt2bepq6kby7p',
-        }
-
-    },
-    {
-        indexId: 9,
-        title: 'A Confederacy of Dunces',
-        author: 'John Kennedy Toole',
-        year: 1980,
-        genreId: 1,
-        imageURL: {
-            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/rstxal8xk784d7288orvapc0xogl',
         }
 
     },
@@ -370,3 +372,99 @@ const swapReviewMerged = [
         author: 'Salman Rushdie'
     }
 ]
+
+const retrivedUserSwapYes = [
+    {
+        author: 'John Kennedy Toole',
+        title: 'A Confederacy of Dunces',
+        indexId: 9,
+        imageURL: {
+            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/rstxal8xk784d7288orvapc0xogl'
+        }
+    },
+    {
+        author: 'Zadie Smith',
+        title: 'White Teeth',
+        indexId: 23,
+        imageURL: {
+            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/kkrgvs3k1xcg5y4wbjy12crve9ia'
+        }
+    },
+    {
+        author: 'Ernest Hemingway',
+        title: 'Stories of Ernest Hemingway',
+        indexId: 45,
+        imageURL: {
+            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/5wf6o4u0ir8ackb0yfeycgzfpl54'
+        }
+    },
+    {
+        author: 'Gabriel Garcia Marquez',
+        title: ' Love in the Time of Cholera',
+        indexId: 66,
+        imageURL: {
+            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/q8z45hoowjkdzz8ehp0rcozm0u2n'
+        }
+    }
+]
+
+const retrievedUserSwapNo = [
+    {
+        author: 'Ian McEwan',
+        title: 'Atonement',
+        indexId: 10,
+        imageURL: {
+            uri: 'https://d3i5mgdwi2ze58.cloudfront.net/alnlrd2t0gt0y12ac1r8owz72kjx'
+        }
+    }
+]
+
+// Merging objects
+// const userId = userB.userId;
+// const filteredno = swap.filter(data => (data.userId == userId && data.availability == "NO"))
+// let obj = {};
+// // make new array of user's swap books
+// const userSwap = filteredno.map(
+//     element => element.indexId
+// );
+
+// //make a dictionary of indexbook's indexid
+// userSwapDictionary = indexBooks.reduce(function(p, c) {
+//     p[c.indexId] = c;
+//     return p;
+// }, {});
+
+// //compare user's swap books index with dictionary, take out necessary details.
+// const retrievedUserSwapNo = userSwap.map(function(c) {
+//     var o = userSwapDictionary[c];
+//     return {
+//         author: o.author,
+//         title: o.title,
+//         indexId: o.indexId,
+//         imageURL: o.imageURL
+//     };
+// });
+// const userId = userB.userId;
+// const filteredyes = swap.filter(data => (data.userId == userId && data.availability == "YES"))
+// let obj = {};
+// // make new array of user's swap books
+// const userSwap = filteredyes.map(
+//     element => element.indexId
+// );
+
+// //make a dictionary of indexbook's indexid
+// userSwapDictionary = indexBooks.reduce(function(p, c) {
+//     p[c.indexId] = c;
+//     return p;
+// }, {});
+
+// //compare user's swap books index with dictionary, take out necessary details.
+// const retrievedUserSwapYes = userSwap.map(function(c) {
+//     var o = userSwapDictionary[c];
+//     return {
+//         author: o.author,
+//         title: o.title,
+//         indexId: o.indexId,
+//         imageURL: o.imageURL
+//     };
+// });
